@@ -6,7 +6,7 @@ public:
         stack<int>st;
         
         int sign=+1;
-        long long curr_num=0;
+        int curr_num=0;
         int ans=0;
         
         for(int i=0;i<n;i++)
