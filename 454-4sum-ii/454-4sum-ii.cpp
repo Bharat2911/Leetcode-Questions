@@ -9,7 +9,9 @@ public:
         {
             for(auto itr2:nums2)
             {
-                map[itr1+itr2]++;
+                int sum_ab=itr1+itr2;
+                
+                map[sum_ab]++;//increase frequency of sum_ab
             }
         }
         
@@ -17,7 +19,10 @@ public:
         {
             for(auto itr4:nums4)
             {
-               count+=map[0-itr3-itr4];
+               int sum_cd=itr3+itr4;
+                int sum_ab=-sum_cd;
+                
+               count+=map[sum_ab];
             }
         }
         return count;
