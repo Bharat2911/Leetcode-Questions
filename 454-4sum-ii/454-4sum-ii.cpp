@@ -17,10 +17,7 @@ public:
         {
             for(auto itr4:nums4)
             {
-                if(map.count(0-itr3-itr4))
-                {
-                    count+=map[0-itr3-itr4];
-                }
+               count+=map[0-itr3-itr4];
             }
         }
         return count;
