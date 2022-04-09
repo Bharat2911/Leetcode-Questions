@@ -2,8 +2,9 @@ class Solution {
 public:
     vector<int> dailyTemperatures(vector<int>& temp) {
         
+        //similar to next greater element but int this stack is storing the index
         int n=temp.size();
-        stack<int>st;//sack is storing the index
+        stack<int>st;//stack is storing the index
         vector<int>ans(n);
         ans[n-1]=0;
         st.push(n-1);
