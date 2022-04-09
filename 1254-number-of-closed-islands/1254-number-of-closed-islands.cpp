@@ -21,6 +21,7 @@ public:
         int count=0;
         vector<vector<int>>vis(row,vector<int>(col,0));
         
+        //jo bhi bounday pe zero the unko one kar diya 
         for(int i=0;i<row;i++)
         {
             for(int j=0;j<col;j++)
@@ -31,7 +32,7 @@ public:
                 }
             }
         }
-        
+        //ab boundary vale zero 1 ho gye so vo count hi nahi honge
         for(int i=0;i<row;i++)
         {
             for(int j=0;j<col;j++)
