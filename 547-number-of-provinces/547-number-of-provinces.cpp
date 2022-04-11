@@ -1,35 +1,37 @@
 class Solution {
 public:
-    void dfs(int start,vector<int>&vis,vector<vector<int>>&grid,int n)
+    void solve(int start,vector<int>&vis,vector<vector<int>>&adj)
     {
         vis[start]=1;
-        
-        vector<int>adj;
-        
-        for(int i=0;i<n;i++)
-        {
-            int x=grid[start][i];
-            if(x==1)
-            {
-                adj.push_back(i);
-            }
-        }
-        for(auto itr:adj)
+        for(auto itr:adj[start])
         {
             if(!vis[itr])
             {
                 vis[itr]=1;
-                dfs(itr,vis,grid,n);
+                solve(itr,vis,adj);
             }
         }
     }
     int findCircleNum(vector<vector<int>>& grid) {
         
-        //make the adj list 
-        //keep the count of component of graph 
-        //this count will be our answer
+        //make the aj list 
+        
+        //count the components of the grpah using the dfs algo
+        
         int n=grid.size();
         
+        vector<vector<int>>adj(n);
+        
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                if(grid[i][j]==1)
+                {
+                    adj[i].push_back(j);
+                }
+            }
+        }
         int count=0;
         vector<int>vis(n,0);
         
@@ -38,8 +40,7 @@ public:
             if(!vis[i])
             {
                 count++;
-                dfs(i,vis,grid,n);
-                
+                solve(i,vis,adj);
             }
         }
         return count;
