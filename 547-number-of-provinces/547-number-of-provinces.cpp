@@ -34,20 +34,7 @@ public:
         
         int n=grid.size();
         
-//         vector<int>adj;
-        
-//         for(int i=0;i<n;i++)
-//         {
-//             for(int j=0;j<n;j++)
-//             {
-//                 int x=grid[i][j];
-                
-//                 if(x==1)
-//                 {
-//                     adj.push_back(i);
-//                 }
-//             }
-//         }
+//
         //by dfs we will count the component
         vector<int>vis(n,0);
         
