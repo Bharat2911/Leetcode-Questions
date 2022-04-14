@@ -1,52 +1,43 @@
 class Solution {
 public:
-    vector<vector<int>> fourSum(vector<int>& ans, int k) {
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
         
-           sort(ans.begin(),ans.end());
-        vector<vector<int>>v;
+        int n=nums.size();
+        sort(nums.begin(),nums.end());
         
-        int count=0;
-        if(ans.size()<4)return{};
-        for(int i=0;i<ans.size()-3;i++)
+        if(nums.size()<4)return{};
+        
+        vector<vector<int>>res;
+        for(int i=0;i<n-3;i++)
         {
-            for(int j=i+1;j<ans.size()-2;j++)
+            for(int j=i+1;j<n-2;j++)
             {
-                int l=j+1;
-                int r=ans.size()-1;
+                int k=j+1;
+                int z=n-1;
                 
-                
-                while(l<r)
+                while(k<z)
                 {
-                    vector<int>v2;
+                    int sum=(long long)nums[i]+nums[j]+nums[k]+nums[z];
                     
-                    if((long long)ans[i]+ans[j]+ans[l]+ans[r]==k)
+                    if(sum<target)
                     {
-                        count++;
-                        v2.push_back(ans[i]);
-                         v2.push_back(ans[j]);
-                         v2.push_back(ans[l]);
-                         v2.push_back(ans[r]);
-                        
-                        v.push_back(v2);
-                        
-                        l++;
-                        r--;
-                        
+                        k++;
                     }
-                    else if((long long)ans[i]+ans[j]+ans[l]+ans[r]<k)
+                    else if(sum>target)
                     {
-                        l++;
+                        z--;
                     }
-                    else 
+                    else
                     {
-                        r--;
+                        res.push_back({nums[i],nums[j],nums[k],nums[z]});
+                        k++;
+                        z--;
                     }
                 }
             }
         }
-       sort(v.begin(),v.end());
-        v.erase(unique(v.begin(), v.end()), v.end());
-        return v;
-        
+        sort(res.begin(),res.end());
+        res.erase(unique(res.begin(), res.end()), res.end());
+        return res;
     }
 };
