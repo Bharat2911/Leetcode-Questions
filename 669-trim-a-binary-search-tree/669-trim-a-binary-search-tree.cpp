@@ -12,24 +12,13 @@
 class Solution {
 public:
     TreeNode* trimBST(TreeNode* root, int low, int high) {
-        
-        //usig the properth of bst 
-        // ->if root->val is less than low then return right nodes because all node right to low are higher
-        // ->if root->val is higher than high then return nodes less than high 
-        
-        //base case
+          //base csae
         if(root==NULL)
         {
             return NULL;
             
         }
-        //doing the inorder traversal
         
-        
-        // move left
-        root->left=trimBST(root->left,low,high);
-        
-        //managing the operation we do on each nodee
         if(root->val<low)
         {
             return trimBST(root->right,low,high);
@@ -39,10 +28,11 @@ public:
             return trimBST(root->left,low,high);
         }
         
-        //move right
-        root->right=trimBST(root->right,low,high);
+        //do this whole stuff on the left subtree
+        root->left=trimBST(root->left,low,high);
         
-        
+        //similarly do this whole stuff on the right subtree
+      root->right=trimBST(root->right,low,high);
         
         return root;
         
