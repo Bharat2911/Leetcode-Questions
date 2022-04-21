@@ -1,10 +1,7 @@
-class Solution
-{
-    public:
-        int calculate(string s)
-        {
-
-            int ans = 0;
+class Solution {
+public:
+    int calculate(string s) {
+        int ans = 0;
             int curr_num = 0;
             int sign = +1;
             stack<int> st;
@@ -52,5 +49,5 @@ class Solution
                 }
             }
             return ans;
-        }
+    }
 };
