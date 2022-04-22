@@ -2,32 +2,67 @@ class MyHashSet
 {
     public:
        	//two approach we will use 
-       	//ist approach ->time optimised
-       	//2nd approach ->space optmised
+       	//ist approach ->time optimised (take an array of size 1e6+1) take bhot saari space
+       	//2nd approach ->space optmised (make a vector list type of size 10)
 
-        vector<bool> set;
+        vector<list < int>> set;
+    int size = 10;
 
     MyHashSet()
     {
 
-        set.resize(1000000 + 1);
+        set.resize(size);
     }
 
+   	//make a function that find index for us whereto add key
+    int find_idx(int key)
+    {
+        int i = key % size;
+
+        return i;
+    }
+    bool search(int key)
+    {
+        int i = find_idx(key);
+
+       	//using the stl function of list
+        std::list<int>::iterator itr = std::find(set[i].begin(), set[i].end(), key);
+
+       	//if itr not reach end of the vector means we get the key 
+        if (itr != set[i].end())
+        {
+            return true;
+        }
+        return false;
+    }
     void add(int key)
     {
 
-        set[key] = true;
+       	//if key i not present in list then we will insert it int the index 
+        int i = find_idx(key);
+
+        if (!search(key))
+        {
+            set[i].push_back(key);
+        }
     }
 
     void remove(int key)
     {
 
-        set[key] = false;
+       	//if key is present then only we will remove it
+        int i = find_idx(key);
+
+        if (search(key))
+        {
+            set[i].remove(key);
+        }
     }
 
     bool contains(int key)
     {
-        return set[key];
+
+        return search(key);
     }
 };
 
