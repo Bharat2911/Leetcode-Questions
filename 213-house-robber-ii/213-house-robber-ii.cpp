@@ -1,6 +1,5 @@
-class Solution
-{
-    public:
+class Solution {
+ public:
         int rec(vector<int> &nums, int n, int dp[], int x)
         {
             if (n <= 1 - x) return 0;
@@ -23,4 +22,4 @@ class Solution
        	//max of both the parts
         return max(op1, op2);
     }
-    };
+};
