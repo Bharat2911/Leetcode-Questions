@@ -1,50 +1,65 @@
 class Solution {
 public:
-      void solve(int i,int j,int row,int col,vector<vector<int>>&grid,vector<vector<int>>&vis)
+    void dfs(vector<vector<int> > &g,vector<vector<bool>> &v,int i,int j)
     {
-        if(i<0 || i>=row || j<0 ||j>=col)return;
-        else if(grid[i][j]==1)return;
-        
-            grid[i][j]=1;
-            //solve in four directions
-            solve(i+1,j,row,col,grid,vis);
-            solve(i,j+1,row,col,grid,vis);
-            solve(i-1,j,row,col,grid,vis);
-            solve(i,j-1,row,col,grid,vis);
-        
-        
+        int n=g.size();
+        int m=g[0].size();
+        if(i<0||i>=n)
+        {
+            return;
+        }
+        if(j<0||j>=m)
+        {
+            return;
+        }
+        if(v[i][j]||g[i][j])
+        {
+            return;
+        }
+        g[i][j]=1;
+        v[i][j]=true;
+        dfs(g,v,i+1,j);
+        dfs(g,v,i-1,j);
+        dfs(g,v,i,j+1);
+        dfs(g,v,i,j-1);
     }
     int closedIsland(vector<vector<int>>& grid) {
-        
-         int row=grid.size();
-        int col=grid[0].size();
-        int count=0;
-        vector<vector<int>>vis(row,vector<int>(col,0));
-        
-        //jo bhi bounday pe zero the unko one kar diya 
-        for(int i=0;i<row;i++)
+      int n=grid.size(),m=grid[0].size();
+      vector<vector<bool> > vis(n,vector<bool>(m,false));
+      for(int i=0;i<n;i++)
+      {
+          if(!vis[i][0]&&!grid[i][0])
+          {
+              dfs(grid,vis,i,0);
+          }
+          if(!vis[i][m-1]&&!grid[i][m-1])
+          {
+              dfs(grid,vis,i,m-1);
+          }
+      }
+      for(int j=0;j<m;j++)
+      {
+          if(!vis[0][j]&&!grid[0][j])
+          {
+              dfs(grid,vis,0,j);
+          }
+          if(!vis[n-1][j]&&!grid[n-1][j])
+          {
+              dfs(grid,vis,n-1,j);
+          }
+      }
+        int c=0;
+        for(int i=1;i<n-1;i++)
         {
-            for(int j=0;j<col;j++)
+            for(int j=1;j<m-1;j++)
             {
-                if(grid[i][j]==0 and (i == 0 || j == 0 || i ==  row-1 || j == col-1))
+                if(!vis[i][j]&&!grid[i][j])
                 {
-                    solve(i,j,row,col,grid,vis);
+                    c++;
+                    dfs(grid,vis,i,j);
                 }
             }
         }
-        //ab boundary vale zero 1 ho gye so vo count hi nahi honge
-        for(int i=0;i<row;i++)
-        {
-            for(int j=0;j<col;j++)
-            {
-                if(grid[i][j]==0)
-                {
-                    count++;
-                    
-                    solve(i,j,row,col,grid,vis);
-                }
-            }
-        }
-        return count;
+        return c;
     }
 };
