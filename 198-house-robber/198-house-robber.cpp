@@ -4,6 +4,7 @@ class Solution
         int solve(int idx, vector<int> &nums,vector<int>&dp)
         {
            	//base case
+            if(idx==0)return nums[idx];
             if (idx < 0) return 0;
             if(dp[idx]!=-1)return dp[idx];
             
