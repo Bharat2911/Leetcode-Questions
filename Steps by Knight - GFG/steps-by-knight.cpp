@@ -7,44 +7,70 @@ class Solution
 {
     public:
     //Function to find out minimum steps Knight needs to reach target position.
+    bool isvalid(int i,int j,int n,vector<vector<bool>>&vis)
+    {
+        if(i>=0 and i<n and j>=0 and j<n and !vis[i][j])
+        {
+            return true;
+        }
+        return false;
+        
+    }
 	int minStepToReachTarget(vector<int>&kp,vector<int>&tp,int n)
 	{
 	    // Code here
-	    //simply bfs question
-	    //will us the visited vector as answer also to store the answer in it
+	    int s1=kp[0]-1;
+	    int s2=kp[1]-1;
+	    
+	    int ti=tp[0]-1;
+	    int tj=tp[1]-1;
+	    
+	    if(s1==ti and s2==tj)
+	    {
+	        return 0;
+	    }
 	    queue<pair<int,int>>q;
-	    //kinght can move in 8 directions
-	    int dx[]={1,2,1,2,-1,-2,-1,-2};
-        int dy[]={-2,-1,2,1,-2,-1,2,1};
+	    vector<vector<bool>>vis(n,vector<bool>(n,false));
 	    
-	    vector<vector<int>>vis(n,vector<int>(n,-1));
-	    
-	    q.push({kp[0]-1,kp[1]-1});//push the starting position int the queue convert in 0 basing 
-	    vis[kp[0]-1][kp[1]-1]=0;//since i am using the vis to sttore the ans
+	    q.push({s1,s2});
+	    vis[s1][s2]=true;
+	    int ans=0;
 	    
 	    while(!q.empty())
 	    {
-	        int i=q.front().first;
-	        int j=q.front().second;
+	        ans++;
+	        int sz=q.size();
 	        
-	        q.pop();
-	        
-	        for(int idx=0;idx<8;idx++)
+	        while(sz--)
 	        {
-	            int newi=i+dx[idx];
-	            int newj=j+dy[idx];
+	            int i=q.front().first;
+	            int j=q.front().second;
+	            q.pop();
 	            
-	            //base case
-	            if(newi>=0 and newi<n and newj>=0 and newj<n and vis[newi][newj]==-1  )
-	            {
-	                vis[newi][newj]=1+vis[i][j];
-	                
-	                q.push({newi,newj});
-	            }
+	            int dx[]={1,2,1,2,-1,-2,-1,-2};
+                int dy[]={-2,-1,2,1,-2,-1,2,1};
+                
+                for(int idx=0;idx<8;idx++)
+                {
+                    int newi=i+dx[idx];
+                    int newj=j+dy[idx];
+                    
+                    //means i have reached the target pos
+                    if(newi==ti and newj==tj)
+                    {
+                        return ans;
+                    }
+                    
+                    if(isvalid(newi,newj,n,vis))
+                    {
+                        vis[newi][newj]=true;
+                        q.push({newi,newj});
+                    }
+                }
+	            
 	        }
-	        
 	    }
-	    return vis[tp[0]-1][tp[1]-1];
+	    return ans;
 	}
 };
 
