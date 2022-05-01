@@ -3,7 +3,7 @@ public:
     int minimumCardPickup(vector<int>& cards) {
         
         //store the last occurance of each card int the map
-        unordered_map<int,int>map;
+        map<int,int>map;
         int ans=INT_MAX;
         
         for(int i=0;i<cards.size();i++)
