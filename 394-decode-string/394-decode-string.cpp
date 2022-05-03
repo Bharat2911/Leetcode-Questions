@@ -1,43 +1,32 @@
 class Solution {
 public:
-    //makign the recursive function
-    string solve(string &s,int &i)
-    {
-        int n=s.length();
-        string ans;
-        
-        while(i<n and s[i]!=']')
-        {
-            if(isdigit(s[i]))
-            {    
-                int k=0;
-                while(i<n and isdigit(s[i]))
-                    k=k*10+(s[i++]-'0');
-                i++;
-                
-                //recursive call bracket ke andar se answer nikal ke dega
-                string temp=solve(s,i);
-                
-                
-                
-                while(k-- > 0)
-                    ans+=temp;//append k times
-                i++;
-                
-                    
+    string decodeString(string s) {
+         stack<string> chars;
+        stack<int> nums;
+        string res;
+        int num = 0;
+        for(char c : s) {
+            if(isdigit(c)) {
+                num = num*10 + (c-'0');                              
             }
-            else 
-            {
-                ans+=s[i];
-                i++;
+            else if(isalpha(c)) {
+                res.push_back(c);                
+            }
+            else if(c == '[') {
+                chars.push(res);
+                nums.push(num);
+                res = "";
+                num = 0;
+            }
+            else if(c == ']') {
+                string tmp = res;
+                for(int i = 0; i < nums.top()-1; ++i) {
+                    res += tmp;
+                }
+                res = chars.top() + res;
+                chars.pop(); nums.pop();
             }
         }
-        return ans;
-    }
-    string decodeString(string s) {
-        
-        //usign the recursion here
-        int i=0;
-        return solve(s,i);
+        return res;
     }
 };
