@@ -7,7 +7,7 @@ class Solution
 {
     public:
     //Function to find out minimum steps Knight needs to reach target position.
-    bool isvalid(int i,int j,int n,vector<vector<bool>>&vis)
+	bool isvalid(int i,int j,int n,vector<vector<bool>>&vis)
     {
         if(i>=0 and i<n and j>=0 and j<n and !vis[i][j])
         {
