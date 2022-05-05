@@ -2,11 +2,12 @@ class Solution {
 public:
     int numOfMinutes(int n, int headID, vector<int>& manager, vector<int>& informTime) {
         
-        //step one make the adj list
-        //step 2 do bfs and stroe the max time
+        //doing the normal bfs 
+        //make the adj list
+        
         vector<int>adj[n];
         
-        for(int i=0;i<manager.size();i++)
+        for(int i=0;i<n;i++)
         {
             if(manager[i]!=-1)
             {
@@ -14,6 +15,7 @@ public:
                 
             }
         }
+        
         queue<pair<int,int>>q;
         q.push({headID,0});
         int ans=0;
@@ -27,6 +29,7 @@ public:
             int newtime=informTime[node]+time;
             
             ans=max(ans,newtime);
+            
             for(auto itr:adj[node])
             {
                 q.push({itr,newtime});
