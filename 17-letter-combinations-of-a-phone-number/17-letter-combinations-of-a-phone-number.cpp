@@ -1,35 +1,37 @@
 class Solution {
 public:
-   vector<string> map{"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
-        
-    void solve(int index,string&digits,string&moves,vector<string>&ans)
+    vector<string> map{"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+    void solve(int idx,string&digits,string &move,vector<string>&ans)
     {
-        //bae case
-        if(index==digits.size())
+        //base case
+        if(idx==digits.length())
         {
-            ans.push_back(moves);
+            ans.push_back(move);
             return;
-        }
-        
-        //itrate in the map
-        for(auto itr:map[digits[index]-'0'])
-        {
-            moves.push_back(itr);
-            solve(index+1,digits,moves,ans);
-            moves.pop_back();
             
         }
+        for(auto itr:map[digits[idx]-'0'])
+        {
+            move.push_back(itr);
+            
+            solve(idx+1,digits,move,ans);
+            
+            move.pop_back();
+            
+        }
+        
     }
     vector<string> letterCombinations(string digits) {
         
+        int index=0;
         vector<string>ans;
-        string moves;
+        string move;
         
-        if(digits.length()==0)return ans;
+        if(digits.length()==0)return{};
         
-        solve(0,digits,moves,ans);
+        
+        solve(index,digits,move,ans);
         
         return ans;
-        
     }
 };
