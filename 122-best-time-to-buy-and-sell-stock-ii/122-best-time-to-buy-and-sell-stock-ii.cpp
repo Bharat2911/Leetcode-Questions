@@ -1,45 +1,48 @@
 class Solution
 {
     public:
-       	//memonize the recursion
-
-        int f(int idx, bool isbuy, vector<int> &prices, int n, vector<vector< int>> &dp)
+        int solve(int idx, int n, vector<int> &prices, bool isbuy,vector<vector<int>>&dp)
         {
            	//base case
             if (idx == n)
             {
                 return 0;
             }
+            
+            if(dp[idx][isbuy]!=-1)
+            {
+                return dp[idx][isbuy];
+            }
+           	//choice didagram
 
+           	//if buy allowed 
+           	// -> buy
+           	// ->not buy
+
+           	//if sell allowed
+           	// ->sell
+           	// ->not sell
             int profit = 0;
 
-            if (dp[idx][isbuy] != -1) return dp[idx][isbuy];
-
-           	//choice diagram
             if (isbuy)
             {
-               	//take or not take two choices here
-                profit = max(-prices[idx] + f(idx + 1, false, prices, n, dp), 0 + f(idx + 1, true, prices, n, dp));
+                profit = max(-prices[idx] + solve(idx + 1, n, prices, false,dp), 0 + solve(idx + 1, n, prices, true,dp));
             }
             else
             {
-               	//whter to sell or not sell again two choices here
-                profit = max(prices[idx] + f(idx + 1, true, prices, n, dp), 0 + f(idx + 1, false, prices, n, dp));
+               	//sell is alowed
+                profit = max(prices[idx] + solve(idx + 1, n, prices, true,dp), 0 + solve(idx + 1, n, prices, false,dp));
             }
 
-            return dp[idx][isbuy] = profit;
+            return dp[idx][isbuy]=profit;
         }
     int maxProfit(vector<int> &prices)
     {
 
-       	//writre the recursion
-       	//base case
-       	//choice diagram
-       	//ans
+        int idx = 0;
         int n = prices.size();
-
+        bool isbuy = true;
         vector<vector < int>> dp(n, vector<int> (2, -1));
-
-        return f(0, true, prices, prices.size(), dp);
+        return solve(idx, n, prices, isbuy,dp);
     }
 };
