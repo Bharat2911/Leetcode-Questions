@@ -1,17 +1,18 @@
 class Solution {
 public:
-    //dfs is a type of recursice sol so memonize it using dp
     
-    int dfs(int i,int j,vector<vector<int>>&matrix,vector<vector<int>>&dp)
+    
+    int solve(int i,int j,vector<vector<int>>& matrix,vector<vector<int>>& vis)
     {
-        int row=matrix.size();
+         int row=matrix.size();
         int col=matrix[0].size();
-        if(dp[i][j]!=-1)return dp[i][j];
+        
+        if(vis[i][j]!=-1)return vis[i][j];
         
         int dx[]={0,1,0,-1};
         int dy[]={1,0,-1,0};
         
-        int res=1;
+        int count=1;
         
         for(int idx=0;idx<4;idx++)
         {
@@ -19,33 +20,34 @@ public:
             int newj=j+dy[idx];
             
             
-            if(newi>=0 and newi<row and newj>=0 and newj<col and matrix[i][j]<matrix[newi][newj])
+            if(newi>=0 and newi<row and newj>=0 and newj<col  and matrix[newi][newj]>matrix[i][j])
             {
-                res=max(res,1+dfs(newi,newj,matrix,dp));
+                
+                
+                count=max(count,1+solve(newi,newj,matrix,vis));
             }
         }
-        return dp[i][j]=res;
+        return  vis[i][j]=count;
     }
     int longestIncreasingPath(vector<vector<int>>& matrix) {
         
-        //we  will be solving this using the dfs
-        //dfs is just like recursion 
-        //if tle then memonize it using the dp
-        
+        //simple dfs and dp
         int row=matrix.size();
         int col=matrix[0].size();
-        vector<vector<int>>dp(row,vector<int>(col,-1));
         
+        vector<vector<int>>vis(row,vector<int>(col,-1));
         int ans=0;
         
         for(int i=0;i<row;i++)
         {
             for(int j=0;j<col;j++)
             {
-                ans=max(ans,dfs(i,j,matrix,dp));
+               
+                   ans=max(ans,solve(i,j,matrix,vis));
+                
             }
         }
-        return ans;
         
+        return ans;
     }
 };
