@@ -10,33 +10,31 @@
 
 class Solution {
 public:
-    TreeNode* getTargetCopy(TreeNode* root, TreeNode* cloned, TreeNode* target) {
-        
+    void store(TreeNode*root,vector<TreeNode*>&ans)
+    {
         if(root==NULL)
         {
-            return NULL;
+            return;
         }
-        queue<TreeNode*>q;
+       store(root->left,ans);
+        ans.push_back(root);
+        store(root->right,ans);
         
-        q.push(cloned);
         
-        while(!q.empty())
+    }
+    TreeNode* getTargetCopy(TreeNode* original, TreeNode* cloned, TreeNode* target) {
+        
+        //store the nodes of clonned tree and then return the target
+        vector<TreeNode*>ans;
+        store(cloned,ans);
+        
+        int n=ans.size();
+        
+        for(int i=0;i<n;i++)
         {
-            TreeNode*node=q.front();
-            q.pop();
-            
-            if(node->val==target->val)
+            if(ans[i]->val==target->val)
             {
-                return node;
-                
-            }
-            if(node->left)
-            {
-                q.push(node->left);
-            }
-            if(node->right)
-            {
-                q.push(node->right);
+                return ans[i];
             }
         }
         return NULL;
