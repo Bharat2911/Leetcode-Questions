@@ -4,6 +4,7 @@ public:
         
         //usingt he even odd methos 
         //choose the center then usse palindrome banao ek baar odd length ke then even length ke
+        //even odd method
         int n=s.length();
         if(n==0 || n==1)
         {
