@@ -1,27 +1,34 @@
-class Solution {
-public:
-    int maxArea(vector<int>& height) {
-         /*
-         water store ==min(left_height,right_height)*distance betweem them
-         
-         */
-        int ans=0;
-        int low=0;
-        int high=height.size()-1;
-        
-        while(low<=high)
+class Solution
+{
+    public:
+        int maxArea(vector<int> &height)
         {
-            ans=max(ans,min(height[low],height[high])*(high-low));
-            
-            if(height[low]<height[high])
+
+           	//usign the two ppinters here 
+            int n = height.size();
+
+            int low = 0;
+            int high = n - 1;
+
+            int ans = 0;
+
+            while (low < high)
             {
-                low++;
+                 ans=max(ans,min(height[low],height[high])*(high-low));
+
+                if (height[low] < height[high])
+                {
+                    
+                     // ans=max(ans,min(height[low],height[high])*(high-low));
+                    
+                    low++;
+                    // high--;
+                }
+                else
+                {
+                   high--;
+                }
             }
-            else
-            {
-                high--;
-            }
+            return ans;
         }
-        return ans;
-    }
 };
