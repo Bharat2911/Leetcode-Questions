@@ -6,7 +6,7 @@ public:
         {
             return count;
         }
-        if(num%2==0)
+        else if(num%2==0)
         {
             return solve(num/2,count+1);
         }
