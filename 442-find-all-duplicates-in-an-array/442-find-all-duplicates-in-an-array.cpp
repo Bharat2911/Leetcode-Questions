@@ -2,26 +2,26 @@ class Solution {
 public:
     vector<int> findDuplicates(vector<int>& nums) {
         
-        // /using the map
-        //o(n) o(n)
-        //optimised o(n),O(1)
-        //constant space me karo to optimised version hai ye
         int n=nums.size();
-        unordered_map<int,int>map;
+        
+        vector<int>ans;
         
         for(auto itr:nums)
         {
-            map[itr]++;
-        }
-        vector<int>ans;
-        
-        for(auto x:map)
-        {
-            if(x.second==2)
+            itr=abs(itr);
+            
+            if(nums[itr-1]>0)
             {
-                ans.push_back(x.first);
+                //element occuring first time
+                nums[itr-1]*=-1;
+            }
+            else
+            {
+                // elemnt occuring the second time
+                 ans.push_back(itr);
             }
         }
+        
         return ans;
     }
 };
