@@ -2,28 +2,23 @@ class Solution {
 public:
     int missingNumber(vector<int>& nums) {
         
-        int n=nums.size();
+      
         
-        //t.c-> O(n);
-        //s.c->O(n);
-        unordered_map<int,int>map;
+        int n = nums.size();
+        sort(nums.begin(), nums.end());
         
-        for(auto itr:nums)
-        {
-            map[itr]++;
-        }
-        int ans=0;
+        int ans = n;
         
-        for(int i=0;i<=n;i++)
-        {
-            if(map.find(i)==map.end())
-            {
-                ans=i;
+        for(int i = 0 ; i < n ; i++){
+            
+            if(nums[i] != i){
+                ans = i;
                 break;
             }
+            
         }
-        return ans;
         
+        return ans;
       
     }
 };
