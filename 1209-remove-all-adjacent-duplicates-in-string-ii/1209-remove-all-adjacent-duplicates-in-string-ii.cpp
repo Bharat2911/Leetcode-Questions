@@ -2,6 +2,7 @@ class Solution {
 public:
     string removeDuplicates(string s, int k) {
         
+        //stack me store kar rha hoga me pair ko
         int n=s.length();
         stack<pair<char,int>>st;
         
@@ -11,6 +12,7 @@ public:
             {
                 st.push({s[i],1});
             }
+            
             else if(st.top().first==s[i])
             {
                 st.top().second++;
@@ -21,7 +23,8 @@ public:
                 }
             }
         }
-        string ans;
+        
+        string ans="";
         
         while(!st.empty())
         {
