@@ -60,32 +60,35 @@ class Solution
             curr=next;
         }
         return prev;
+        
     }
+    //add karne se phele meri jaan reverse kar lena 
+    
     Node* addOne(Node *head) 
     {
         // Your Code here
         // return head of list after adding one
-        //in this question we have to tackerl the three cases
-        
-        
-        //step 1->reverse the ll
-        //step 2->tackelt he three cases
-        //step 3->agin reverse;
-        
         head=reverse(head);
+        
         Node*curr=head;
+        
+        
         
         while(curr!=NULL)
         {
-            //three cases
-            if(curr->next==NULL and curr->data==9)
+            // /we have to tackle the three cases
+            if(curr->data==9 and curr->next==NULL)
             {
                 curr->data=1;
+                //new node jiski value 0 ho usko haed banao
                 Node*temp=new Node(0);
+                
                 temp->next=head;
+                
                 head=temp;
                 
                 curr=curr->next;
+                
             }
             else if(curr->data==9)
             {
@@ -96,12 +99,10 @@ class Solution
             {
                 curr->data=curr->data+1;
                 curr=curr->next;
-                
                 break;
             }
         }
         head=reverse(head);
-        
         return head;
     }
 };
