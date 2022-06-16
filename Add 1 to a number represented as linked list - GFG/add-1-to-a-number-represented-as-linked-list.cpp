@@ -60,35 +60,25 @@ class Solution
             curr=next;
         }
         return prev;
-        
     }
-    //add karne se phele meri jaan reverse kar lena 
-    
     Node* addOne(Node *head) 
     {
         // Your Code here
         // return head of list after adding one
         head=reverse(head);
-        
         Node*curr=head;
-        
-        
         
         while(curr!=NULL)
         {
-            // /we have to tackle the three cases
+            //we have to tackle the three cases here
             if(curr->data==9 and curr->next==NULL)
             {
                 curr->data=1;
-                //new node jiski value 0 ho usko haed banao
                 Node*temp=new Node(0);
-                
                 temp->next=head;
-                
                 head=temp;
                 
                 curr=curr->next;
-                
             }
             else if(curr->data==9)
             {
@@ -104,6 +94,7 @@ class Solution
         }
         head=reverse(head);
         return head;
+        
     }
 };
 
