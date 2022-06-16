@@ -52,27 +52,26 @@ class Solution
     struct node *reverse (struct node *head, int k)
     { 
         // Complete this method
-        //first k elemnts reverse through itration then apply recursion
-        int count=0;
         node*curr=head;
         node*prev=NULL;
         node*next;
+        int count=0;
         
-        while(count!=k and curr!=NULL)
+        while(curr!=NULL and count<k)
         {
             next=curr->next;
             curr->next=prev;
             prev=curr;
             curr=next;
-            
             count++;
         }
+        
         if(next)
         {
             head->next=reverse(next,k);
+            
         }
         return prev;
-        
     }
 };
 
