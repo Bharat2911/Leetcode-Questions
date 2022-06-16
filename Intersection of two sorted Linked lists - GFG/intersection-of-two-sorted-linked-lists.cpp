@@ -84,13 +84,15 @@ struct Node
 Node* findIntersection(Node* head1, Node* head2)
 {
     // Your Code Here
+    //we have two approach to solve this 
+    //one is map based approach
+    //other is two pointer approach
     Node*ptr1=head1;
     Node*ptr2=head2;
+    Node*dummy_node=new Node(0);
+    Node*ptr=dummy_node;
     
-    Node*dummy=new Node(0);
-    Node*temp=dummy;
-    
-    while(ptr1!=NULL and ptr2!=NULL)
+    while(ptr1 and ptr2)
     {
         if(ptr1->data<ptr2->data)
         {
@@ -102,11 +104,11 @@ Node* findIntersection(Node* head1, Node* head2)
         }
         else
         {
-            temp->next=ptr1;
+            ptr->next=ptr1;
+            ptr=ptr->next;
             ptr1=ptr1->next;
             ptr2=ptr2->next;
-            temp=temp->next;
         }
     }
-    return dummy->next;
+    return dummy_node->next;
 }
