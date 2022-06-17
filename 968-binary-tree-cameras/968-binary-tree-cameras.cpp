@@ -30,7 +30,9 @@ class Solution
 
     int minCameraCover(TreeNode *root)
     {
-
+        //base case 
+        //if we only have root
+        
        camera_count= solve(root)==need_camera?camera_count+1:camera_count;
 
         return camera_count;
@@ -42,13 +44,15 @@ class Solution
            	//no camera is needed
             return not_needed_camera;
         }
-       	//leaf
+       	// checking for leaf
         if (root->left == NULL and root->right == NULL)
         {
            	//since camera will be needed in this case
             return need_camera;
         }
-
+        //goinf in postorder manner 
+        //left->right->root
+        
         int left = solve(root->left);
         int right = solve(root->right);
 
@@ -65,7 +69,7 @@ class Solution
         }
         return need_camera;
         
-        //Time_complexity =O(n)//since we aretraversing the nodes onlyonce
+        //Time_complexity =O(n)//since we are traversing the nodes only once
         //space_complexity==log(n);
         
     }
