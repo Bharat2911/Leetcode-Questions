@@ -1,70 +1,62 @@
-class Solution
-{
-    public:
-    static bool comp(string &s1 ,string &s2)
+class Solution {
+public:
+    static bool comp(string&s1,string&s2)
     {
-        return s1.size()<s2.size();
+        return s1.length()<s2.length();
     }
-        bool compare(string &s1, string &s2)
-        {
-            int n = s1.length();
-            int m = s2.length();
-            //str1 is greater and str2 is smaller  since in subsequence manner 
-            
-            if(n!=m+1)return false;
-            
-            int count = 0;
-
-            int ptr1 = 0;
-            int ptr2 = 0;
-
-            while (ptr1 < n )
-            {
-                if (s1[ptr1] == s2[ptr2])
-                {
-                    ptr1++;
-                    ptr2++;
-                }
-                else if (s1[ptr1] != s2[ptr2])
-                {
-                    ptr1++;
-                    count++;
-                }
-            }
-            if (count == 1) return true;
-            return false;
-        }
-    int longestStrChain(vector<string> &words)
+    bool compare(string&s1 ,string &s2)
     {
-
-       	//prerequsite is lis in this problem 
-       	//a basic dp problem one must knw how to do it
-
-       	//same as lis ,in lis we search for increasing subsequnce but here we will search for the subsequence which differ only with one character
+        if(s1.length()!=s2.length()+1)return false;
         
+        int count=0;
+        int i=0;
+        int j=0;
+        //since string  s1 is greater than string s2
         
-        int n = words.size();
-        vector<int> dp(n, 1);
-         
-        //we have to sort acc to the length 
-        sort(words.begin(),words.end(),comp);
-        
-        for (int i = 1; i < n; i++)
+        while(i<s1.length())
         {
-            for (int j = 0; j < i; j++)
+            if(s1[i]==s2[j])
             {
-                if (compare(words[i], words[j]) and dp[i] < dp[j] + 1)
+                i++;
+                j++;
+            }
+            else
+            {
+                count++;
+                i++;
+            }
+        }
+        if(count==1)return true;
+        else return false;
+    }
+    int longestStrChain(vector<string>& s) {
+        
+        //smae as lis
+        int n=s.size();
+        
+        vector<int>dp(n,1);
+        //i have to sort it acc to the length
+        
+        sort(s.begin(),s.end(),comp);
+        
+        
+        for(int i=1;i<n;i++)
+        {
+            for(int j=0;j<i;j++)
+            {
+                if(compare(s[i],s[j]) and dp[i]<dp[j]+1)
                 {
-                    dp[i] = dp[j] + 1;
+                    dp[i]=dp[j]+1;
                 }
             }
         }
-        int maxi = INT_MIN;
-
-        for (int i = 0; i < n; i++)
+        
+        int ans=INT_MIN;
+        
+        for(int i=0;i<n;i++)
         {
-            maxi = max(maxi, dp[i]);
+            ans=max(ans,dp[i]);
         }
-        return maxi;
+        return ans;
     }
 };
