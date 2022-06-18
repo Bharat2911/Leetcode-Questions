@@ -4,21 +4,17 @@ class Solution
         void solve(int idx, vector<int> &nums, vector<vector< int >> &ans, vector< int > res)
         {
            	//base case
-            if (idx == nums.size())
-            {
-
-                ans.push_back(res);
-                return;
-            }
+         ans.push_back(res);
+            if(idx==nums.size())
+            return;
             
-            //choose
-            res.push_back(nums[idx]);
-            solve(idx+1,nums,ans,res);
-            
-            //not chose
-            
-            res.pop_back();//backtraking step;
-            solve(idx+1,nums,ans,res);
+           for(int i=idx;i<nums.size();i++)
+           {
+               res.push_back(nums[i]);
+               solve(i+1,nums,ans,res);
+               res.pop_back();
+               
+           }
             
             
         }
