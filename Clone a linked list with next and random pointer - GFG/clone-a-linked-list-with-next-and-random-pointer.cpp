@@ -24,25 +24,26 @@ class Solution
     Node *copyList(Node *head)
     {
         //Write your code here
-                //step 1->make the copy pointer
+        //we will be solving this in three steps
+        //step 1->make the clone
+        //step 2->connect arbitaries
+        //strp 3->split the originals and copy
+        
         Node*curr=head;
         Node*temp;
-        
         while(curr!=NULL)
         {
-            temp=curr->next;
+          temp=curr->next;
             
-            curr->next=new Node(curr->data);
-            
-            curr->next->next=temp;
-            
-            curr=temp;
-            
-            //so that the copy node is created for the full linked list
-            
+          curr->next=new Node(curr->data);
+           
+           curr->next->next=temp;
+           
+           curr=temp;
+           
         }
+        //step 2 connect all arbitarieas
         
-        //step 2->connect all the arbitary noses
         curr=head;
         
         while(curr!=NULL)
@@ -54,23 +55,24 @@ class Solution
             //so that all the copy nodes are connected togethre and original nodes are connected togehter
         }
         
-        //step 3-> original alag and copy alag
-        
+        //step 3 split original and copy list
         Node*original=head;
         Node*copy=head->next;
+        Node*new_head=copy;
         
-        temp=copy;//temp ko copy list ka head bana diya in the end return temp
-        
-        while(original !=NULL and copy!=NULL)
+        while(original and copy)
         {
             original->next=original->next->next;
-            copy->next=(copy->next)? (copy->next->next):copy->next;
             
-            original=original->next;
+            if(copy->next!=NULL)
+            {
+                copy->next=copy->next->next;
+            }
             copy=copy->next;
+            original=original->next;
         }
         
-        return temp;
+        return new_head;
     }
 
 };
