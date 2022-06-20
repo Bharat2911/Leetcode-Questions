@@ -1,42 +1,42 @@
 class Solution {
 public:
-    void solve(vector<int>&arr,int target,int sum,int idx,vector<vector<int>>&ans,vector<int>&res)
+    void solve(int index,vector<int>&nums,vector<int>&res,vector<vector<int>>&ans,int sum)
     {
-        //bae csae
+        //base case
         
-        if(idx==arr.size())
+        if(index==nums.size())
         {
-            if(target==0)
+            if(sum==0)
             {
                 ans.push_back(res);
             }
             return;
         }
-        //once we include the elemnt 
-        //we wil only add if current element is less than equal to target
-        if(arr[idx]<=target)
+        
+        //pick 
+        if(nums[index]<=sum)
         {
-            res.push_back(arr[idx]);
-            solve(arr,target-arr[idx],sum,idx,ans,res);
-            res.pop_back();//backtaking step
+            res.push_back(nums[index]);
+            
+            solve(index,nums,res,ans,sum-nums[index]);
+            
+            res.pop_back();//backtraking step
             
         }
         
-        //if we dont choose
-        solve(arr,target,sum,idx+1,ans,res);
-    }
-    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        //not pick 
+        solve(index+1,nums,res,ans,sum);
         
-        //wach elel has two options wether to pick or not pick
-        int sum=0;
-        int idx=0;
+    }
+    vector<vector<int>> combinationSum(vector<int>& nums, int sum) {
         
         vector<vector<int>>ans;
         vector<int>res;
         
-        solve(candidates, target, sum, idx,ans,res);
+        int index=0;
+        solve(index,nums,res,ans,sum);
         
         return ans;
-
+        
     }
 };
