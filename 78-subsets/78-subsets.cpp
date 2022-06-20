@@ -2,22 +2,18 @@ class Solution {
 public:
     void solve(int index,vector<int>&nums,vector<vector<int>>&res,vector<int>&ans)
     {
-        //base case
-        if(index==nums.size())
+        res.push_back(ans);
+        
+        for(int i=index;i<nums.size();i++)
         {
-            res.push_back(ans);
-            return;
+            ans.push_back(nums[i]);
+            
+            solve(i+1,nums,res,ans);
+            
+            
+            ans.pop_back();
+            
         }
-        
-        //pick
-        ans.push_back(nums[index]);
-        solve(index+1,nums,res,ans);
-        
-        //not pick 
-        //backtrak it
-        ans.pop_back();
-        solve(index+1,nums,res,ans);
-        
     }
     vector<vector<int>> subsets(vector<int>& nums) {
         
