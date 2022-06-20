@@ -1,27 +1,31 @@
-class Solution {
-public:
-    void solve(int idx,vector<int>&nums,vector<vector<int>>&ans,vector<int>&res)
-    {
-        ans.push_back(res);
-        
-        for(int i=idx;i<nums.size();i++)
+class Solution
+{
+    public:
+        void solve(int index, vector<int> &nums, vector<vector< int >> &res, vector< int > &ans)
         {
-             if(i!=idx && nums[i] == nums[i-1]) continue; 
-            res.push_back(nums[i]);
-            solve(i+1,nums,ans,res);
-            res.pop_back();//backtraking steps
+            res.push_back(ans);
+
+            for (int i = index; i < nums.size(); i++)
+            {
+                if(i!=index and nums[i]==nums[i-1])continue;
+                
+                ans.push_back(nums[i]);
+
+                solve(i + 1, nums, res, ans);
+
+                ans.pop_back();
+            }
         }
-    }
-    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
-        
-        //use the set to remove the duplicates but that will cuse the space complexitiy to O(n)
-        vector<vector<int>>ans;
-        vector<int>res;
-        sort(nums.begin(),nums.end());
-        int idx=0;
-        
-        solve(idx,nums,ans,res);
-        
-        return ans;
+    vector<vector < int>> subsetsWithDup(vector<int> &nums)
+    {
+        int n = nums.size();
+
+        vector<vector < int>> res;
+        vector<int> ans;
+        sort(nums.begin(), nums.end());
+
+        solve(0, nums, res, ans);
+
+        return res;
     }
 };
