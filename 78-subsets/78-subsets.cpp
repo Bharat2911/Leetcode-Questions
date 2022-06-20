@@ -1,35 +1,33 @@
-class Solution
-{
-    public:
-        void solve(int idx, vector<int> &nums, vector<vector< int >> &ans, vector< int > res)
-        {
-           	//base case
-         ans.push_back(res);
-            if(idx==nums.size())
-            return;
-            
-           for(int i=idx;i<nums.size();i++)
-           {
-               res.push_back(nums[i]);
-               solve(i+1,nums,ans,res);
-               res.pop_back();
-               
-           }
-            
-            
-        }
-    vector<vector < int>> subsets(vector<int> &nums)
+class Solution {
+public:
+    void solve(int index,vector<int>&nums,vector<vector<int>>&res,vector<int>&ans)
     {
-
-       	//each elemnt have two options whether i will chose or will not choose
-        vector<vector < int>> ans;
-
-        vector<int> res;
-
-        int idx = 0;
-
-        solve(idx, nums, ans, res);
-
-        return ans;
+        //base case
+        if(index==nums.size())
+        {
+            res.push_back(ans);
+            return;
+        }
+        
+        //pick
+        ans.push_back(nums[index]);
+        solve(index+1,nums,res,ans);
+        
+        //not pick 
+        //backtrak it
+        ans.pop_back();
+        solve(index+1,nums,res,ans);
+        
+    }
+    vector<vector<int>> subsets(vector<int>& nums) {
+        
+        int n=nums.size();
+        
+        vector<vector<int>>res;
+        vector<int>ans;
+        
+        solve(0,nums,res,ans);
+        
+        return res;
     }
 };
