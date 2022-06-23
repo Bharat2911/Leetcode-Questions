@@ -10,7 +10,7 @@ using namespace std;
 
 class Solution{
     public:
-     void solve(int i,int j,vector<vector<int>>&arr,int n,string move,vector<string>&ans,vector<vector<int>>&vis)
+   void solve(int i,int j,vector<vector<int>>&arr,int n,string move,vector<string>&ans,vector<vector<int>>&vis)
     {
         if(i==n-1 && j==n-1)
         {
