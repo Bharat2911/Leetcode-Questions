@@ -9,13 +9,13 @@ using namespace std;
 
 class Solution{
 public:
- int solve(int arr[],int n,int sum)
+    int solve(int arr[],int n,int sum)
     {
         int dp[n+1][sum+1];
         
         for(int i=0;i<n+1;i++)
         {
-              dp[i][0]=1;
+            dp[i][0]=1;
             
         }
         for(int j=1;j<sum+1;j++)
@@ -38,16 +38,15 @@ public:
             }
         }
         return dp[n][sum];
-        
     }
     int equalPartition(int N, int arr[])
     {
         // code here
         int sum=0;
-       for(int i=0;i<N;i++)
-       {
-           sum+=arr[i];
-       }
+        for(int i=0;i<N;i++)
+        {
+            sum+=arr[i];
+        }
         
         if(sum&1)return 0;
         
