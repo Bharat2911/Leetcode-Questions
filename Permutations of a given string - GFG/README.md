@@ -1,5 +1,5 @@
 # Permutations of a given string
-##  Medium 
+## Medium 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">Given a string S. The task is to print all permutations of a given string in lexicographically sorted order.</span></p>
 
