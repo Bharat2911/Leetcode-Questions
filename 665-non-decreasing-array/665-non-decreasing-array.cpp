@@ -14,6 +14,7 @@ public:
                 count++;
                 
             }
+            if(count>1)return false;
             // tackle corner case
             if(i-2>=0 and i+1<n and nums[i-2]>nums[i] and nums[i-1]>nums[i+1])return false;
         }
