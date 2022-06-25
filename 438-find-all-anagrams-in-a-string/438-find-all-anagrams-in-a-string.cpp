@@ -1,10 +1,7 @@
-class Solution
-{
-    public:
-        vector<int> findAnagrams(string s, string p)
-        {
-           	//making the two freq array
-
+class Solution {
+public:
+    vector<int> findAnagrams(string s, string p) {
+     
             vector<int> for_s(26, 0);
 
             vector<int> for_p(26, 0);
@@ -42,5 +39,6 @@ class Solution
                 }
             }
             return ans;
-        }
+        
+    }
 };
