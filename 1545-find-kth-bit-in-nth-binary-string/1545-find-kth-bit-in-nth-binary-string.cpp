@@ -1,47 +1,38 @@
 class Solution {
 public:
-    string reverse_str(string &str)
+    string reverse_str(string&temp)
     {
-        //first invert the given string then 
-        //reverse the string 
-        
-        for(int i=0;i<str.length();i++)
+        for(int i=0;i<temp.size();i++)
         {
-            if(str[i]=='1')
+            if(temp[i]=='0')
             {
-                str[i]='0';
+                temp[i]='1';
             }
             else
             {
-                str[i]='1';
+                temp[i]='0';
             }
+            
+            
         }
-        reverse(str.begin(),str.end());
-        return str;
+        reverse(temp.begin(),temp.end());
+        return temp;
     }
-    string make_str(int n)
+    string get_str(int n)
     {
-        //we will be using the recursion to make the prev strings
-        
-        //base condition 
         if(n==1)
         {
             return "0";
         }
+        string temp=get_str(n-1);
         
-        string prev=make_str(n-1);//since n is from 1 so it cant be negative when we subtract
-        
-        string ans="";
-        
-        ans=prev+"1"+reverse_str(prev);
-        
-        return ans;
-        
+        return temp+"1"+reverse_str(temp);
     }
     char findKthBit(int n, int k) {
         
-        string ans=make_str(n);
+        string ans=get_str(n);
         
         return ans[k-1];
+        
     }
 };
