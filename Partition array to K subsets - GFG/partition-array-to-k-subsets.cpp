@@ -29,7 +29,7 @@ class Solution{
                     if (solve(i + 1, curr_sum + nums[i], sum, nums, vis, k,n)) return true;
 
                     vis[i] = 0;
-                    if(curr_sum==0)break;
+                    // if(curr_sum==0)break;
                 }
             }
             return false;
