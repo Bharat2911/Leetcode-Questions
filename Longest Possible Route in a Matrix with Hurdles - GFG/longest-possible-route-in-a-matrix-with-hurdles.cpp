@@ -10,37 +10,55 @@ using namespace std;
 
 class Solution {
 public:
-//bfs always give the shortest path so we wil be usnt 
-    vector<int> rh, ch ;
- 
-int dfs(vector<vector<int>>& m, int xs, int ys, int& xd, int& yd,int &r, int& c,vector< vector<bool>>& vis){
-    if(!m[xs][ys])
-        return -1 ;
+    int ans=0;
     
-    if(xs == xd && ys == yd)
-        return 0 ;
+   int dx[4]={-1,0,1,0};
+   int dy[4]={0,1,0,-1};
     
-    vis[xs][ys] = true ;
-    int ans = -1 ;
-    for(int i=0; i<4 ; i++){
-        int nx = xs + rh[i] , ny = ys + ch[i] ;
-        if(nx >= 0 && ny >= 0 && nx < r && ny < c && !vis[nx][ny]){
-            int tans = dfs(m,nx,ny,xd,yd,r,c,vis) ;
-            if(tans != -1)
-                ans = max(ans,1+tans) ;
+    void solve(int i,int j,int row,int col,vector<vector<bool>>&vis,int endi,int endj,int count ,vector<vector<int>>&matrix)
+    {
+        //base case
+        if(!matrix[endi][endj])return ;
+        
+        if(i==endi and j==endj)
+        { 
+            ans=max(ans,count);
         }
-    }
-    vis[xs][ys] = false ;
-    return ans ;
-}
+        
+        vis[i][j]=true;
+        
+        for(int idx=0;idx<4;idx++)
+        {
+            int newi=i+dx[idx];
+            int newj=j+dy[idx];
+            
+            if(newi>=0 and newi<row and newj>=0 and newj<col and !vis[newi][newj] and matrix[newi][newj]!=0)
+            {
 
-int longestPath(vector<vector<int>>& m, int xs, int ys, int xd, int yd)
-{   
-    rh = {-1,0,0,1} , ch = {0,-1,1,0} ; 
-    int r = m.size(), c = m[0].size() ;
-    vector< vector<bool>> vis(r, vector<bool>(c,false)) ;
-    return dfs(m,xs,ys,xd,yd,r,c,vis) ;
-}
+               solve(newi,newj,row,col,vis,endi,endj,count+1,matrix);
+           
+            }
+        }
+        vis[i][j]=false;
+        
+    }
+    int longestPath(vector<vector<int>> matrix, int xs, int ys, int xd, int yd)
+    {
+        // code here
+        int row=matrix.size();
+        int col=matrix[0].size();
+        
+         
+        if(matrix[xs][ys]==0 || matrix[xd][yd]==0)return -1;
+        
+        vector<vector<bool>>vis(row,vector<bool>(col,false));
+        
+        solve(xs,ys,row,col,vis,xd,yd,0,matrix);
+        
+        if(ans==0)return -1;
+        
+        return ans;
+    }
 };
 
 // { Driver Code Starts.
