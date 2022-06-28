@@ -9,5 +9,31 @@ public:
         
         return nums[k-1];
         
+        // T.c=O(N log n)
+        // S.C =O(1);
+        
+        
+        
+        //optimised using the heap
+        
+        //max heap
+        priority_queue<int>pq;
+        
+        for(auto itr:nums)
+        {
+            pq.push(itr);
+        }
+        
+        k--;
+        
+        while(!pq.empty() and k>0)
+        {
+            pq.pop();
+            
+            k--;
+        }
+        
+        return pq.top();
+        
     }
 };
