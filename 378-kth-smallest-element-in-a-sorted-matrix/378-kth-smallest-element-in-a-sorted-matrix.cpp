@@ -10,7 +10,7 @@ public:
         vector<int>ans;
         
         //make a min heap  
-        priority_queue<int,vector<int>,greater<int>>pq;
+        priority_queue<int>pq;
         
         
         for(int i=0;i<matrix.size();i++)
@@ -18,14 +18,14 @@ public:
             for(int j=0;j<matrix[0].size();j++)
             {
                 pq.push(matrix[i][j]);
+                
+                if(pq.size()>k)
+                {
+                    pq.pop();
+                }
             }
         }
-        k--;
-        while(!pq.empty() and k>0)
-        {
-            pq.pop();
-            k--;
-        }
         return pq.top();
+        
     }
 };
