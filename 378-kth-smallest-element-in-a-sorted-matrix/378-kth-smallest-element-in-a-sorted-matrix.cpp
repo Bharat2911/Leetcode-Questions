@@ -9,14 +9,23 @@ public:
         
         vector<int>ans;
         
+        //make a min heap  
+        priority_queue<int,vector<int>,greater<int>>pq;
+        
+        
         for(int i=0;i<matrix.size();i++)
         {
             for(int j=0;j<matrix[0].size();j++)
             {
-                ans.push_back(matrix[i][j]);
+                pq.push(matrix[i][j]);
             }
         }
-        sort(ans.begin(),ans.end());
-        return ans[k-1];
+        k--;
+        while(!pq.empty() and k>0)
+        {
+            pq.pop();
+            k--;
+        }
+        return pq.top();
     }
 };
