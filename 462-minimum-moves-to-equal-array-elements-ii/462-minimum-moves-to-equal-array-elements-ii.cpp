@@ -17,7 +17,9 @@ public:
          beacuse in the sorted array the mid element will have the least distance from all the
          other elements.
          
+         T.C  =O(n log n); becoz of sorting 
          
+         SD.C=O(1);
          
          
        */
