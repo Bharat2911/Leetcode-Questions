@@ -1,28 +1,33 @@
 class Solution {
 public:
-    //using recursion +memonization (itn short using the dp)
-    
-    int solve(int m,int n,vector<vector<int>>&dp)
+    int solve(int i,int j,int m,int n,vector<vector<int>>&dp)
     {
         //base case
-        if(m==0 || n==0)return 0;
+        //outof bound condtiion
         
-        if(m==1 || n==1)return 1;
+        if(i<0 || i>=m || j<0 ||j>=n)
+        {
+            return 0;
+        }
         
-        if(dp[m][n]!=-1)return dp[m][n];
+        if(i==m-1 and j==n-1)
+        {
+            return 1;
+        }
+        if(dp[i][j]!=-1)return dp[i][j];
         
+        int a=solve(i+1,j,m,n,dp);
+        int b=solve(i,j+1,m,n,dp);
         
-        int a=solve(m-1,n,dp);
-        int b=solve(m,n-1,dp);
-        
-        return dp[m][n]=a+b;
-        
+        return dp[i][j]=a+b;
     }
     int uniquePaths(int m, int n) {
         
-        vector<vector<int>>dp(m+1,vector<int>(n+1,-1));
+        int i=0;
+        int j=0;
+        vector<vector<int>>dp(m,vector<int>(n,-1));
+       return solve(i,j,m,n,dp);
         
-        return solve(m,n,dp);
         
     }
 };
