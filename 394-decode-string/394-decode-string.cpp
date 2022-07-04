@@ -1,32 +1,68 @@
 class Solution {
 public:
     string decodeString(string s) {
-         stack<string> chars;
-        stack<int> nums;
-        string res;
-        int num = 0;
-        for(char c : s) {
-            if(isdigit(c)) {
-                num = num*10 + (c-'0');                              
+        
+        //asked in amazon
+        
+        //will be doing this using thetwo stack
+        int n=s.length();
+        
+        stack<string>char_st;
+        stack<int>num_st;
+        
+        int num=0;
+        string res="";
+        
+        for(auto itr:s)
+        {
+            //we have to tackel the four cases here
+            //digit ,char ,open bracket,close bracket
+            
+            if(isdigit(itr))
+            {
+                //make the number 
+                num=num*10+(itr-'0');
             }
-            else if(isalpha(c)) {
-                res.push_back(c);                
+            
+            else if(isalpha(itr))
+            {
+                res+=itr;
+                
             }
-            else if(c == '[') {
-                chars.push(res);
-                nums.push(num);
-                res = "";
-                num = 0;
+            else if(itr=='[')
+            {
+                //here we have to push in the stack
+                char_st.push(res);
+                num_st.push(num);
+                
+                //and reset the value again
+                num=0;
+                res="";
             }
-            else if(c == ']') {
-                string tmp = res;
-                for(int i = 0; i < nums.top()-1; ++i) {
-                    res += tmp;
+            else 
+            {
+                //main step
+                //when we have closing value 
+                string temp=res;
+                res=char_st.top();
+                char_st.pop();
+                int freq=num_st.top();
+                num_st.pop();
+                
+                while(freq>0)
+                {
+                    res+=temp;
+                    freq--;
                 }
-                res = chars.top() + res;
-                chars.pop(); nums.pop();
+                num=0;
+                //reset the digit
+                
+                
             }
         }
+        //take away points
+        //open bracket push in stack
+        //close bracket pop from stack
         return res;
     }
 };
