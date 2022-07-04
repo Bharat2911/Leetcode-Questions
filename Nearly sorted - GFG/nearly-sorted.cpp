@@ -8,15 +8,31 @@ class Solution
 {
     public:
     //Function to return the sorted array.
-    vector <int> nearlySorted(int arr[], int num, int K){
+    vector <int> nearlySorted(int arr[], int num, int k){
         // Your code here
-        sort(arr,arr+num);
-        
+        //will maintain a min heap here
         vector<int>ans;
+        
+        // T.C ==O(n log k)
+        
+        priority_queue<int,vector<int>,greater<int>>pq;
         
         for(int i=0;i<num;i++)
         {
-            ans.push_back(arr[i]);
+            //push in pq and as soon its size greater than k pop from it ans push top in ans
+            pq.push(arr[i]);
+            
+            if(pq.size()>k)
+            {
+                ans.push_back(pq.top());
+                pq.pop();
+            }
+        }
+        //push all the remaining ele in the ans
+        while(!pq.empty())
+        {
+            ans.push_back(pq.top());
+            pq.pop();
         }
         return ans;
     }
