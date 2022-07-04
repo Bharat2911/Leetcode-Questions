@@ -46,35 +46,36 @@ struct Node
 class Solution{
   public:
     //Function to merge K sorted linked list.
-    Node*merge(Node*h1,Node*h2)
+    Node*merge(Node*l1 ,Node*l2)
     {
-        if(h1==NULL)return h2;
-        if(h2==NULL)return h1;
+        if(l1==NULL)return l2;
+        if(l2==NULL)return l1;
         
-        Node*result;
+        Node*result=NULL;
         
-        if(h1->data<=h2->data)
+        if(l1->data<l2->data)
         {
-            result=h1;
-            result->next=merge(h1->next,h2);
+            result=l1;
+            result->next=merge(l1->next,l2);
         }
         else
         {
-            result=h2;
-            result->next=merge(h1,h2->next);
+            result=l2;
+            result->next=merge(l1,l2->next);
         }
+        
         return result;
     }
-    Node * mergeKLists(Node *arr[], int K)
+    Node * mergeKLists(Node *arr[], int k)
     {
            // Your code here
-           Node*head=arr[0];
+           Node*first=arr[0];
            
-           for(int i=1;i<K;i++)
+           for(int i=1;i<k;i++)
            {
-               head=merge(head,arr[i]);
+               first=merge(first,arr[i]);
            }
-           return head;
+           return first;
     }
 };
 
