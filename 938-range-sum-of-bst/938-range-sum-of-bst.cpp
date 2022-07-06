@@ -11,43 +11,44 @@
  */
 class Solution {
 public:
+    void solve(TreeNode*root,int low,int high,int &sum)
+    {
+        //i will follow the preorder traversal here
+        
+        if(root==NULL)
+        {
+            return;
+        }
+           
+        // root->left->right 
+        
+        if(root->val>=low and root->val<=high)
+        {
+            sum+=root->val;
+        }
+        
+        solve(root->left,low,high,sum);
+        
+        solve(root->right,low,high,sum);
+        
+        
+        
+        
+    }
     int rangeSumBST(TreeNode* root, int low, int high) {
         
-        //we will use level order traversal here 
-        int sum=0;
+        //write a recursive function for this then
         
+        //base case
         if(root==NULL)
         {
             return 0;
         }
-        queue<TreeNode*>q;
+        int sum=0;
         
-        q.push(root);
+        solve(root,low,high,sum);
         
-        while(!q.empty())
-        {
-            int sz=q.size();
-            
-            while(sz--)
-            {
-                TreeNode*node=q.front();
-                q.pop();
-                
-                if(node->val>=low and node->val<=high)
-                {
-                    sum+=node->val;
-                }
-                
-                if(node->left)
-                {
-                    q.push(node->left);
-                }
-                if(node->right)
-                {
-                    q.push(node->right);
-                }
-            }
-        }
         return sum;
+        
     }
 };
