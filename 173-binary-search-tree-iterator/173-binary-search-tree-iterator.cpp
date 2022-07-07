@@ -11,41 +11,41 @@
  */
 class BSTIterator {
 public:
-    //this is an optimised approach 
-    //t.c=O(1);
-    //s.c=O(h);
+    priority_queue<int,vector<int>,greater<int>>pq;
     
-    stack<TreeNode*>st;
-    
-    BSTIterator(TreeNode* root) {
-        
-        push_left(root);
-        
-    }
-    void push_left(TreeNode*root)
+    void inorder(TreeNode*root)
     {
-        //pushes left element into the stack
-        while(root)
+        if(root==NULL)
         {
-            st.push(root);
-            root=root->left;
+            return;
         }
         
+        inorder(root->left);
+        
+        pq.push(root->val);
+        
+        inorder(root->right);
+        
     }
+    BSTIterator(TreeNode* root) {
+        
+        inorder(root);
+        
+    }
+    
     int next() {
         
-        TreeNode*top=st.top();
-        st.pop();
+        int top=pq.top();
+        pq.pop();
         
-        push_left(top->right);
+        return top;
         
-        return top->val;
     }
     
     bool hasNext() {
         
-        if(!st.empty())return true;
-        return false;
+        return pq.size();
+        
     }
 };
 
