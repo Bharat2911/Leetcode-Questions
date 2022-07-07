@@ -1,40 +1,35 @@
 class Solution {
 public:
-    
-    int solve(int index,vector<int>&nums,int n,vector<int>&dp)
-    {
-        //bae case
-        if(index>n-1)
+    int rob(vector<int>& nums) {
+        
+        int n=nums.size();
+        
+        if(n==0)
         {
             return 0;
         }
         
-        if(dp[index]!=-1)return dp[index];
+        if(n==1)
+        {
+            return nums[0];
+        }
         
-        //two options 
+        if(n==2)
+        {
+            return max(nums[0],nums[1]);
+            
+        }
         
-        int pick = nums[index]+solve(index+2,nums,n,dp);//i cant choose the ele next to it
+        int dp[n];
         
-        int not_pick=solve(index+1,nums,n,dp);
+        dp[0]=nums[0];
+        dp[1]=max(nums[0],nums[1]);
         
+        for(int i=2;i<n;i++)
+        {
+            dp[i]=max(nums[i]+dp[i-2],dp[i-1]);
+        }
         
-        return dp[index]=max(pick,not_pick);
-        
-    }
-    int rob(vector<int>& nums) {
-        
-        //we will be writing a recursion function
-        
-        //concept -. if we choose the curr ele then we cant take the ele just next to i t
-        
-        int index=0;
-        
-        int n=nums.size();
-        
-        vector<int>dp(n,-1);
-        
-        
-        return solve(index,nums,n,dp);
-        
+        return dp[n-1];
     }
 };
