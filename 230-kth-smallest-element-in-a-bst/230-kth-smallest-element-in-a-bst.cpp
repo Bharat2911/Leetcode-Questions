@@ -11,22 +11,34 @@
  */
 class Solution {
 public:
-    void solve(TreeNode*root,vector<int>&ans)
+    // we have to space optimised it bro
+    
+    int ans=0;
+    int count=0;
+    
+    void solve(TreeNode*root,int k)
     {
-        if(root==NULL)
-        {
-            return;
-        }
-        solve(root->left,ans);
-        ans.push_back(root->val);
-        solve(root->right,ans);
+        if(root==NULL)return;
+        
+        //inorder
+        solve(root->left,k);
+        
+        count++;
+        
+        if(count==k)ans=root->val;
+        
+        solve(root->right,k);
+            
+            
     }
     int kthSmallest(TreeNode* root, int k) {
         
-        vector<int>ans;
         
-        solve(root,ans);
         
-        return ans[k-1];
+        if(root==NULL)return 0;
+        
+        solve(root,k);
+        
+        return ans;
     }
 };
