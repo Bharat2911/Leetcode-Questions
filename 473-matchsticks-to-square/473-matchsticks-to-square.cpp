@@ -1,60 +1,71 @@
 class Solution
 {
     public:
-        bool solve(vector<int> &nums, vector<int> &vis, int index, int k, int curr_sum, int &sum)
+        bool solve(int index,vector<int>&arr,int curr_sum,int target_sum,vector<int>&vis,int k)
         {
-            if (k == 0) return true;
-
-            if (curr_sum > sum) return false;
-
-            if (curr_sum == sum)
+            if(k==0)return true;
+            
+            if(curr_sum>target_sum)return false;
+            
+            if(curr_sum==target_sum)
             {
-                return solve(nums, vis, 0, k - 1, 0, sum);
+                return solve(0,arr,0,target_sum,vis,k-1);
+                
             }
-
-            for (int i = index; i < nums.size(); i++)
+            
+            for(int i=index;i<arr.size();i++)
             {
-                if (vis[i]) continue;
-
-                vis[i] = 1;
-
-                if (solve(nums, vis, i + 1, k, curr_sum + nums[i], sum)) return true;
-
-                vis[i] = 0;
-
-                if (curr_sum == 0) break;
+                if(vis[i])continue;
+                
+                vis[i]=1;
+                
+                if(solve(i+1,arr,curr_sum+arr[i],target_sum,vis,k))
+                {
+                    return true;
+                }
+                
+                vis[i]=0;
+                
+                if(curr_sum==0)break;
             }
-
             return false;
         }
-    bool makesquare(vector<int> &nums)
-    {
+        bool makesquare(vector<int> &arr)
+        {
 
-        
-            int k = 4;
+           	//we just have to check whether we can partition the given subset into four equal sum subset
+           	// square properties
+           	// all the four sides have equal length 
+            
+            int k=4;
+            
+            int n = arr.size();
 
-            int total_sum = 0;
             int curr_sum = 0;
 
-            int index = 0;
-            int mx = 0;
+            int target_sum = 0;
 
-            for (auto itr: nums)
+            vector<int> vis(n, 0);
+
+            for (auto itr: arr)
             {
-                total_sum += itr;
+                target_sum += itr;
             }
 
-            if (total_sum % k != 0) return false;
+            if (target_sum % k != 0)
+            {
+                return false;
+                
+            }
+            if(n<k)return false;
+            
+            target_sum=target_sum/k;
+            
+            int index=0;
+            
+            
+            return solve(index,arr,curr_sum,target_sum,vis,k);
+            
 
-            if (nums.size() < k) return false;
-
-            total_sum = total_sum / k;
-
-            vector<int> vis(nums.size(), 0);
-
-            return solve(nums, vis, index, k, curr_sum, total_sum);
         }
-       	//     bool makesquare(vector<int>& matchsticks) {
-
-       	// }
-    };
+};
