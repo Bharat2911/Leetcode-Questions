@@ -87,44 +87,29 @@ Node* buildTree(string str)
 //Function to count number of nodes in BST that lie in the given range.
 class Solution{
 public:
-    int getCount(Node *root, int l, int r)
+int count=0;
+    void solve(Node*root,int l,int h)
+    {
+        if(root==NULL)return;
+        
+        solve(root->left,l,h);
+        
+        if(root->data>=l and root->data<=h)
+        {
+            count++;
+        }
+        
+        solve(root->right,l,h);
+    }
+    int getCount(Node *root, int l, int h)
     {
       // your code goes here   
-      int ans=0;
-      //level order traversal
-      queue<Node*>q;
-      
-      q.push(root);
-      
-      //itrating through each elemnet preent in the level
-      
-      while(!q.empty())
-      {
-         int sz=q.size();
-         
-         while(sz--)
-         {
-             Node*temp=q.front();
-             
-             q.pop();
-             
-             if(temp->data>=l and temp->data<=r)
-             {
-                 ans++;
-             }
-             
-             if(temp->left)
-             {
-                 q.push(temp->left);
-             }
-             if(temp->right)
-             {
-                 q.push(temp->right);
-             }
-         }
-          
-      }
-      return ans;
+      //ekk to hai ki apan level order traversal se kar le
+       if(root==NULL)return 0;
+       
+       solve(root,l,h);
+       
+       return count;
     }
 };
 
