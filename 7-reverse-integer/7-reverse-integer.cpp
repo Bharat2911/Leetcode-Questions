@@ -2,36 +2,38 @@ class Solution {
 public:
     int reverse(int x) {
         
-     //convert integer to string 
-        
+        //convert to strign 
         string str=to_string(x);
         
-    //manage the sign 
         
+        //deal with the sign
         int sign=1;
         
         if(str[0]=='-')
         {
             sign=-1;
-           
+            
         }
         
-     //reverse the string 
+        //reverse the strign 
         
-        int n=str.length();
         int low=0;
-        int high=n-1;
-        while(low<=high)
+        int high=str.length()-1;
+        
+        while(low<high)
         {
             swap(str[low++],str[high--]);
         }
         
-        //convert string to integer
-        //stol ->convert string to long int
         
-        if(stol(str)<INT_MIN || stol(str)>INT_MAX)return 0;//out of the bond condition
+        //convert strign to integer again
+        //stol ->string to long int
         
+        long long ans=stol(str);
         
-        return sign*stol(str);
+        if(ans<INT_MIN || ans>INT_MAX)return 0;
+        
+        return sign*ans;
+        
     }
 };
