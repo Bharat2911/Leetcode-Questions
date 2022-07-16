@@ -1,42 +1,41 @@
-class Solution {
-public:
-    int findPeakElement(vector<int>& nums) {
-        
-        //doing the linear itration
-        int n=nums.size();
-        
-        int idx=0;
-        
-        //base case here we have to add
-        if(n==1)
+class Solution
+{
+    public:
+        int findPeakElement(vector<int> &nums)
         {
-            return 0;
-            
-        }
-        
-        for(int i=0;i<n;i++)
-        {
-            //handel the case of corner elemnet here
-            if(i==0)
+
+           	//will find this using linear searching
+            int n = nums.size();
+            if (n == 1)
             {
-                if(nums[i]>nums[i+1])
+                return 0;
+            }
+            int ans = 0;
+
+            for (int i = 0; i < n; i++)
+            {
+                if (i == 0)
                 {
-                    idx=i;
+                    if (nums[i] > nums[i + 1])
+                    {
+                        ans = i;
+                       	break;
+                    }
+                }
+                else if (i == n - 1)
+                {
+                    if (nums[i] > nums[i - 1])
+                    {
+                        ans = i;
+                       	break;
+                    }
+                }
+                else if (nums[i] > nums[i + 1] and nums[i] > nums[i - 1])
+                {
+                    ans = i;
+                   	break;
                 }
             }
-           else if(i==n-1)
-            {
-                if(nums[i]>nums[i-1])
-                {
-                    idx=i;
-                }
-            }
-           else if(nums[i]>nums[i-1] and nums[i]>nums[i+1])
-            {
-                idx=i;
-                
-            }
+            return ans;
         }
-        return idx;
-    }
 };
