@@ -5,45 +5,45 @@ class Solution
         {
 
             int n = s.length();
-            int i = 0;
-            int j = n - 1;
+            int low = 0;
+            int high = n - 1;
             int count = 0;
 
-            while (i < j)
+            while (low < high)
             {
-                if (s[i] == s[j])
+                if (s[low] == s[high])
                 {
-                    i++;
-                    j--;
+                    low++;
+                    high--;
                 }
                 else
                 {
-                    i++;
+                    low++;
                     count++;
                 }
             }
-            if (count == 1 || count==0) return true;
-           
-            
-            i=0;
-            j=n-1;
-            count=0;
-            
-            while(i<j)
+            if (count == 0 || count == 1) return true;
+
+            low = 0;
+            high = n - 1;
+            count = 0;
+
+            while (low < high)
             {
-                if(s[i]==s[j])
+                if (s[low] == s[high])
                 {
-                    i++;
-                    j--;
+                    low++;
+                    high--;
                 }
                 else
                 {
-                    j--;
+                    high--;
                     count++;
                 }
             }
-            if(count==0 || count==1)return true;
+            if (count == 0 || count == 1) return true;
             
             return false;
+            
         }
 };
