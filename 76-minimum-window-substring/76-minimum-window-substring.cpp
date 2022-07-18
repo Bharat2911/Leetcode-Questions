@@ -1,8 +1,9 @@
-class Solution {
-public:
-    string minWindow(string s, string t) {
-        
-        if(t.length()==0 || s.length()==0)return "";
+class Solution
+{
+    public:
+        string minWindow(string s, string t)
+        {
+            if(t.length()==0 || s.length()==0)return "";
         
         int i=0;
         int j=0;
@@ -45,5 +46,5 @@ public:
             }
         }
         return (len != INT_MAX) ? ans : "";
-    }
+        }
 };
