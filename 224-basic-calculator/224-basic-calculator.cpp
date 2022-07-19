@@ -1,53 +1,66 @@
-class Solution {
-public:
-    int calculate(string s) {
-        int ans = 0;
-            int curr_num = 0;
+class Solution
+{
+    public:
+        int calculate(string s)
+        {
+
+            int n = s.length();
+
+            int digit = 0;
             int sign = +1;
+            int ans = 0;
+
             stack<int> st;
 
-            for (int i = 0; i < s.length(); i++)
+            for (int i = 0; i < n; i++)
             {
-                if (isdigit(s[i]))
-                {
-                    curr_num = s[i] - '0';
 
-                    while (i + 1 < s.length() and isdigit(s[i + 1]))	//jab tak integr mile usko number banate jao
+               	//integer
+                if (s[i] >= '0'
+                    and s[i] <= '9')
+                {
+                    digit = s[i] - '0';
+
+                    while (i + 1 < n and(s[i + 1] >= '0'
+                            and s[i + 1] <= '9'))
                     {
-                        curr_num = curr_num *10 + (s[i + 1] - '0');
+                        digit = digit *10 + (s[i + 1] - '0');
                         i++;
                     }
-                    curr_num = curr_num * sign;
-                    ans += curr_num;
-                    curr_num = 0;
 
+                    digit = digit * sign;
+                    ans += digit;
+                    digit = 0;
                     sign = +1;
                 }
                 else if (s[i] == '+')
                 {
                     sign = +1;
                 }
-                else if (s[i] == '-')
+                else if(s[i]=='-')
                 {
-                    sign = -1;
+                    sign=-1;
                 }
-                else if (s[i] == '(')
+                else if(s[i]=='(')
                 {
                     st.push(ans);
                     st.push(sign);
-                    sign = +1;
-                    ans = 0;
+                    ans=0;
+                    sign=+1;
                 }
-                else if (s[i] == ')')
+                else if(s[i]==')')
                 {
-                    int prev_sign = st.top();
+                    int prev_sign=st.top();
                     st.pop();
-                    int prev_ans = st.top();
+                    
+                    int num=st.top();
                     st.pop();
-                    ans = ans * prev_sign;
-                    ans = ans + prev_ans;
+                    
+                    ans=ans*prev_sign;
+                    ans=ans+num;
                 }
             }
             return ans;
-    }
+            
+        }
 };
