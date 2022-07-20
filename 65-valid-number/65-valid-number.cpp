@@ -1,6 +1,10 @@
 class Solution
 {
     public:
+    //only one itration we are doing 
+    //T.C=O(n)
+    //s.c=O(1)
+    
         bool isNumber(string s)
         {
 
