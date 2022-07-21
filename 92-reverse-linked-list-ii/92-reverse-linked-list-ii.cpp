@@ -1,39 +1,40 @@
 /**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
+ *Definition for singly-linked list.
+ *struct ListNode {
+ *int val;
+ *ListNode * next;
+ *ListNode() : val(0), next(nullptr) {}
+ *ListNode(int x) : val(x), next(nullptr) {}
+ *ListNode(int x, ListNode *next) : val(x), next(next) {}
+ *};
  */
-class Solution {
-public:
-    ListNode*reverse(ListNode*head)
-    {
-        ListNode*curr=head;
-        ListNode*prev=NULL;
-        ListNode*next;
-        
-        while(curr!=NULL)
+class Solution
+{
+    public:
+        ListNode *reverse(ListNode *head)
         {
-            next=curr->next;
-            curr->next=prev;
-            prev=curr;
-            curr=next;
+            ListNode *prev = NULL;
+            ListNode *curr = head;
+            ListNode * next;
+            while (curr != NULL)
+            {
+                next = curr->next;
+                curr->next = prev;
+                prev = curr;
+                curr = next;
+            }
+            return prev;
         }
-        return prev;
-    }
-    ListNode* reverseBetween(ListNode* head, int left, int right) {
-        
-       ListNode*start=head;
-       ListNode*prev=NULL;
-       ListNode*next;
-       ListNode*end=head;
+    ListNode* reverseBetween(ListNode *head, int left, int right)
+    {
+
+       	//points assign karo then reverse karo bro  ListNode*
+        ListNode *start = head;
+        ListNode*prev=NULL;
+        ListNode*end=head;
+        ListNode*connect;
         
         int count=1;
-        
         while(count!=left)
         {
             prev=start;
@@ -44,24 +45,28 @@ public:
         count=1;
         while(count!=right)
         {
-            
             end=end->next;
             count++;
         }
-        next=end->next;
+        
+        connect=end->next;
         end->next=NULL;
         
-        ListNode*newhead=reverse(start);
-        
-        ListNode*curr=newhead;
-        while(curr->next!=NULL)
+
+        ListNode *newhead = reverse(start);
+        ListNode *curr = newhead;
+        while (curr->next != NULL)
         {
-            curr=curr->next;
-            
+            curr = curr->next;
         }
-       if(prev!=NULL) prev->next=newhead;
-        curr->next=next;
-        if(left==1)return newhead;
+       	//now just connect the nodes
+        if (prev != NULL) prev->next = newhead;
+        curr->next = connect;
+
+        if (left == 1)
+        {
+            return newhead;
+        }
         return head;
     }
 };
