@@ -1,8 +1,8 @@
 class Solution {
 public:
-    bool isIsomorphic(string s, string t) {
-        
-        int n=s.length();
+    bool solve(string &s,string &t)
+    {
+         int n=s.length();
         int m=t.length();
         
         if(n!=m)
@@ -10,22 +10,27 @@ public:
             return false;
         }
         
-        int m1[256]={0};
-        int m2[256]={0};
+       map<char,char>map;
         
         for(int i=0;i<n;i++)
         {
-            if(!m1[s[i]] and !m2[t[i]])
+            if(map.find(s[i])!=map.end())
             {
-                m1[s[i]]=t[i];
-                m2[t[i]]=s[i];
+                if(map[s[i]]!=t[i])
+                {
+                    return false;
+                }
             }
-            else if(m1[s[i]]!=t[i])
+            else
             {
-                return false;
-                
+                map[s[i]]=t[i];
             }
         }
         return true;
+    }
+    bool isIsomorphic(string s, string t) {
+        
+       return solve(s,t) and solve(t,s);
+        
     }
 };
