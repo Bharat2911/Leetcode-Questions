@@ -1,33 +1,40 @@
-class Solution {
-public:
-    int solve(int i,int j,int m,int n,vector<vector<int>>&dp)
+class Solution
+{
+    public:
+        int solve(int i, int j, int row, int col,vector<vector<int>>&dp)
+        {
+           	//base case (out of bound case)
+            if (i < 0 || i >= row || j < 0 || j >= col)
+            {
+                return 0;
+            }
+
+            if (i == row - 1 and j == col - 1)	//reached the end point
+            {
+                return 1;
+            }
+            
+            if(dp[i][j]!=-1)return dp[i][j];//means it is already seen
+            
+
+           	//look out all possiblities
+
+            int down = solve(i + 1, j, row, col,dp);
+
+            int right = solve(i, j + 1, row, col,dp);
+
+            return dp[i][j]=down + right;
+        }
+    int uniquePaths(int m, int n)
     {
-        //base case
-        //outof bound condtiion
-        
-        if(i<0 || i>=m || j<0 ||j>=n)
-        {
-            return 0;
-        }
-        
-        if(i==m-1 and j==n-1)
-        {
-            return 1;
-        }
-        if(dp[i][j]!=-1)return dp[i][j];
-        
-        int a=solve(i+1,j,m,n,dp);
-        int b=solve(i,j+1,m,n,dp);
-        
-        return dp[i][j]=a+b;
-    }
-    int uniquePaths(int m, int n) {
-        
-        int i=0;
-        int j=0;
-        vector<vector<int>>dp(m,vector<int>(n,-1));
-       return solve(i,j,m,n,dp);
-        
-        
+
+       	//more than one ways so we will use the recursion
+        int i = 0;
+
+        int j = 0;
+
+        vector<vector < int>> dp(m, vector<int> (n, -1));
+
+        return solve(i, j, m, n,dp);
     }
 };
