@@ -1,33 +1,33 @@
 class Solution {
 public:
-
-    
     int eraseOverlapIntervals(vector<vector<int>>& intervals) {
+        
+        int n=intervals.size();
         
         sort(intervals.begin(),intervals.end());
         
-        int count=0;
+        int ans=0;
         
-        int i=0;
-        int j=1;
+        int previous=0;
         
-        while(j<intervals.size())
+        for(int current=1;current<n;current++)
         {
-            if(intervals[i][1]>intervals[j][0])
+            if(intervals[previous][1]>intervals[current][0])//we have a overlapping
             {
-                count++;
+                //case arrive that which interval i have to remove
                 
-                if(intervals[i][1]>=intervals[j][1])
-                    i=j;
-                j++;
+                ans++;//since i have to remove
+                
+                if(intervals[previous][1]>intervals[current][1])
+                {
+                    previous=current;//remove first one
+                }
             }
             else
             {
-                i=j;
-                j++;
-                
+                previous=current;
             }
         }
-        return count;
+     return ans;   
     }
 };
