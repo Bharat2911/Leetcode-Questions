@@ -2,24 +2,23 @@ class Solution {
 public:
     vector<string> findRepeatedDnaSequences(string s) {
         
-     ///why to use sliding window when i can directly use map;
-         //10 10 len ki string banao aur map me update karo uski frequency betu 
-        
-        int n=s.length();
+        int len=s.length();
         
         unordered_map<string,int>map;
         
-        //chalo map ko fill karte hai jii
-        
-        for(int i=0;i<n;i++)
+        for(int i=0;i<len;i++)
         {
             int j=i;
+            
             string str;
-            while(j<i+10 and j<n)
+            
+            while(j<i+10 and j<len)
             {
                 str+=s[j];
+                
                 j++;
             }
+            
             map[str]++;
         }
         
