@@ -1,36 +1,54 @@
-class Solution {
-public:
-    int maxVowels(string s, int k) {
-        
-        int n=s.length();
-        
-        int i=0;
-        int j=0;
-        
-        int vowels=0;
-        
-        int ans=0;
-        
-        while(j<n)
+class Solution
+{
+    public:
+        bool isvowel(char ch)
         {
-            if(s[j]=='a' || s[j]=='e' || s[j]=='i' || s[j]=='o' || s[j]=='u')
+           	//curr char is vowel or not 
+            return (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u');
+        }
+    int maxVowels(string s, int k)
+    {
+
+        int n = s.length();
+
+        int ans = 0;
+
+        int vowel = 0;
+
+        int i = 0;
+        int j = 0;
+
+        while (j < n)
+        {
+
+            if (isvowel(s[j]))
             {
-                vowels++;
+                vowel++;
             }
-            
-            if(j-i+1<k)
+
+           	//window not hit
+
+            if (j - i + 1 < k)
             {
-                j++;
+                j++;	//expanding my window
             }
-            else if(j-i+1==k)
+
+           	// window hit
+
+            else if (j - i + 1 == k)
             {
-                ans=max(ans,vowels);
-                
-                if(s[i]=='a' || s[i]=='e' || s[i]=='i' || s[i]=='o' || s[i]=='u')
+               	//answer
+                ans = max(ans, vowel);
+
+               	//shrink the window
+
+                if (isvowel(s[i]))
                 {
-                    vowels--;
+                    vowel--;
                 }
-                
+
+               	//move the window 
+
                 i++;
                 j++;
             }
