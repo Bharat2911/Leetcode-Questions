@@ -1,36 +1,36 @@
-class Solution
-{
-    public:
-    void solve(string output,int open,int close,vector<string>&ans,int n)
+class Solution {
+public:
+    
+    void solve(string pattern,int open,int close,int n,vector<string>&ans)
     {
-        //base case
-        if(output.length()==2*n)
+        if(pattern.length()==2*n)
         {
-            ans.push_back(output);
+            ans.push_back(pattern);
             return;
         }
         
-        //two conditions we have
+        //two choices
         if(open<n)
         {
-            solve(output+"(",open+1,close,ans,n);
+            solve(pattern+"(",open+1,close,n,ans);
         }
-        
         if(close<open)
         {
-            solve(output+")",open,close+1,ans,n);
+            solve(pattern+")",open,close+1,n,ans);
         }
-        
-        //backtracking step
-        output.pop_back();
+        // pattern.pop_back();//backtraking step;
     }
-        vector<string> generateParenthesis(int n)
-        {
-
-            vector<string> ans;
-
-            solve("(", 1, 0, ans, n);
-
-            return ans;
-        }
+    vector<string> generateParenthesis(int n) {
+        
+        int open=1;
+        int close=0;
+        
+        vector<string>ans;
+        
+        
+        
+        solve("(",open,close,n,ans);
+        
+        return ans;
+    }
 };
