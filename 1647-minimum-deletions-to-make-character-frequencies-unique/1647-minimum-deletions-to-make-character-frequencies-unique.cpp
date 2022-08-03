@@ -1,38 +1,32 @@
-class Solution
-{
-    public:
-        int minDeletions(string s)
+class Solution {
+public:
+    int minDeletions(string s) {
+        
+        int n=s.length();
+        
+        vector<int>freq(26,0);
+        
+        unordered_map<int,int>map;
+        
+        for(auto itr:s)
         {
-
-            int n = s.length();
-
-            unordered_map<char, int> map1;
-
-           	//storing the freq of each char in the map
-
-            for (auto itr: s)
-
-            {
-                map1[itr]++;
-            }
-
-            unordered_map<int, bool> map2;
-
-            int ans = 0;
-
-            for (auto itr: map1)
-            {
-
-                while (map2.find(itr.second) != map2.end()) 
-                {
-                    itr.second--;
-                    ans++;
-                }
-                if(itr.second>0)
-                {
-                    map2[itr.second]=true;
-                }
-            }
-            return ans;
+            freq[itr-'a']++;
         }
+        
+        int count=0;
+        
+        for(auto itr:freq)
+        {
+            while(itr!=0 and map.find(itr)!=map.end())
+            {
+                count++;
+                itr--;
+            }
+            if(itr>0)
+            {
+                map[itr]++;
+            }
+        }
+        return count;
+    }
 };
