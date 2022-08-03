@@ -1,5 +1,7 @@
 class Solution {
 public:
+    //T.C = O(nlog n)since use sorting 
+    //S.C=O(26)=O(1)
     int leastInterval(vector<char>& tasks, int n) {
         
         //similar laga mujhe reorganized string ke 
