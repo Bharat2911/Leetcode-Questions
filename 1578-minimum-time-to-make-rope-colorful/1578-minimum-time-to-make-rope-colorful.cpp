@@ -4,9 +4,9 @@ public:
         
         int n=str.length();
         
-        int previous=0;
-        
         int ans=0;
+        
+        int previous=0;
         
         for(int current=1;current<n;current++)
         {
@@ -14,11 +14,12 @@ public:
             {
                 ans+=min(time[previous],time[current]);
                 
+                //i have to remove
+                
                 if(time[previous]<time[current])
                 {
                     previous=current;
                 }
-                
             }
             else
             {
