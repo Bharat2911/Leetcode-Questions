@@ -6,21 +6,19 @@ public:
         
         sort(intervals.begin(),intervals.end());
         
-        int ans=0;
-        
         int previous=0;
+        int count=0;
         
         for(int current=1;current<n;current++)
         {
-            if(intervals[previous][1]>intervals[current][0])//we have a overlapping
+            if(intervals[previous][1]>intervals[current][0])
             {
-                //case arrive that which interval i have to remove
-                
-                ans++;//since i have to remove
+                //we ar ehaving the overlapping intervals int this 
+                count++;
                 
                 if(intervals[previous][1]>intervals[current][1])
                 {
-                    previous=current;//remove first one
+                    previous=current;
                 }
             }
             else
@@ -28,6 +26,7 @@ public:
                 previous=current;
             }
         }
-     return ans;   
+        
+        return count;
     }
 };
