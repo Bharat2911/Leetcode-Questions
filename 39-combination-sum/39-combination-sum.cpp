@@ -1,42 +1,42 @@
 class Solution {
 public:
-    void solve(int index,vector<int>&nums,vector<int>&res,vector<vector<int>>&ans,int sum)
+    void solve(vector<int>&nums,int idx,int sum,vector<vector<int>>&res,vector<int>&ans)
     {
         //base case
-        
-        if(index==nums.size())
+        if(idx==nums.size())
         {
             if(sum==0)
             {
-                ans.push_back(res);
+                res.push_back(ans);
             }
             return;
         }
         
         //pick 
-        if(nums[index]<=sum)
+        if(nums[idx]<=sum)
         {
-            res.push_back(nums[index]);
+            ans.push_back(nums[idx]);
             
-            solve(index,nums,res,ans,sum-nums[index]);
+            solve(nums,idx,sum-nums[idx],res,ans);
             
-            res.pop_back();//backtraking step
-            
+            ans.pop_back();//backtraking step
         }
         
-        //not pick 
-        solve(index+1,nums,res,ans,sum);
+        //not pick
         
+        solve(nums,idx+1,sum,res,ans);
     }
     vector<vector<int>> combinationSum(vector<int>& nums, int sum) {
+     
+        //this is a backtraking bitch jii
+     
+        vector<vector<int>>res;
+        vector<int>ans;
         
-        vector<vector<int>>ans;
-        vector<int>res;
+        int idx=0;
         
-        int index=0;
-        solve(index,nums,res,ans,sum);
+        solve(nums,idx,sum,res,ans);
         
-        return ans;
-        
+        return res;
     }
 };
