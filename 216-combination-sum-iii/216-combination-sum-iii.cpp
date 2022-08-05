@@ -1,45 +1,57 @@
-class Solution
-{
-    public:
+class Solution {
+public:
+    void solve(int idx,int k,int n,vector<vector<int>>&res,vector<int>&ans)
+    {
+        if(idx>10)
+        {
+            return;
+        }
         
-        void solve(int index,vector<int>&res,vector<vector<int>>&ans,int k,int sum)
+        if(ans.size()==k and n==0)
         {
-            if(index>10)
-            {
-                return;
-            }
-            if(res.size()==k )
-            {
-                if(sum==0)
-                {
-                    ans.push_back(res);
-                }
-                return;
-            }
-            
-            //pick and not pick
-            
-            if(index<=sum)
-            {
-                res.push_back(index);
-                solve(index+1,res,ans,k,sum-index);
-                
-                res.pop_back();//backtraking step
-            }
-            
-            //not pick
-            solve(index+1,res,ans,k,sum);
-            
+            res.push_back(ans);
+            return;
         }
-        vector<vector < int>> combinationSum3(int k, int n) 
+        
+        //pick
+        if(idx<=n)
         {
-            vector<int>res;
-            vector<vector<int>>ans;
+            ans.push_back(idx);
             
-            int index=1;
+            solve(idx+1,k,n-idx,res,ans);
             
-            solve(index,res,ans,k,n);
-            
-            return ans;
+            ans.pop_back();
         }
+        
+        solve(idx+1,k,n,res,ans);
+    }
+    vector<vector<int>> combinationSum3(int k, int n) {
+        
+        
+        
+        int idx=1;
+        
+        vector<vector<int>>res;
+        vector<int>ans;
+        
+        int sum=0;
+        
+        solve(idx,k,n,res,ans);
+        
+         set<vector<int>>set;
+        
+        for(auto itr:res)
+        {
+            set.insert(itr);
+        }
+        
+         vector<vector<int>>v;
+        
+        for(auto itr:set)
+        {
+            v.push_back(itr);
+        }
+        return v;
+    
+    }
 };
