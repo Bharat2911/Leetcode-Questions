@@ -2,7 +2,7 @@ class Solution {
 public:
     int deleteAndEarn(vector<int>& nums) {
         
-        vector<int>dp(10001,0);
+         vector<int>dp(10001,0);
         vector<int>sum(10001,0);
         
         for(auto i:nums)
