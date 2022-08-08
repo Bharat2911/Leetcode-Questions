@@ -1,55 +1,55 @@
 class Solution {
 public:
-    int largestRectangleArea(vector<int>& arr) {
+    int largestRectangleArea(vector<int>& height) {
         
-        int n=arr.size();
+        //for a particullar elemnet i have to find the previous smallest index and next smallest element index
+        stack<int>st;//and stack will store the index here
         
-        stack<int>st;
+        int n=height.size();
         
-        int left[n];//store index of smaller number from left
+        int left[n];
+        int right[n];
         
-        int right[n];//stor index of smaller number from right
         
         
-        //first we will fill the left array
         for(int i=0;i<n;i++)
         {
-            while(!st.empty() and arr[st.top()]>=arr[i])
+            while(!st.empty() and height[i]<=height[st.top()])
             {
                 st.pop();
             }
-            
-            if(st.empty())left[i]=0;
-            else left[i]=st.top()+1;//since convert to one based indexing 
+            if(st.empty())left[i]=-1;
+            else left[i]=st.top();
             
             st.push(i);
         }
         
-        //now wmpty the stack to use it for the filling of right array
-
+        //now empty the stack so that we can gain use it in fingidn the nect smalles
         while(!st.empty())
         {
             st.pop();
         }
         
-        //now fill thr right arrya
+        
+        
         for(int i=n-1;i>=0;i--)
         {
-            while(!st.empty() and arr[st.top()]>=arr[i])
+            while(!st.empty() and height[i]<=height[st.top()])
             {
                 st.pop();
             }
+            if(st.empty())right[i]=n;
             
-            if(st.empty())right[i]=n-1;
-            else right[i]=st.top()-1;
+            else right[i]=st.top();
             
             st.push(i);
         }
-        int ans=0;
+        int area=INT_MIN;
+        
         for(int i=0;i<n;i++)
         {
-            ans=max(ans,arr[i]*(right[i]-left[i]+1));
+            area=max(area,height[i]*(right[i]-left[i]-1));
         }
-        return ans;
+        return area;
     }
 };
