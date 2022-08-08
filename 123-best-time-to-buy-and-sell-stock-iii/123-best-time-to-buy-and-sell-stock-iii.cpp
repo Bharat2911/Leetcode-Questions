@@ -1,7 +1,6 @@
-class Solution
-{
-    public:
-        int f(int idx, bool isbuy, vector<int> &prices, int n, vector<vector< vector< int>>> &dp, int k)
+class Solution {
+public:
+   int f(int idx, bool isbuy, vector<int> &prices, int n, vector<vector< vector< int>>> &dp, int k)
         {
            	//base case
             if (idx == n || k == 0)
