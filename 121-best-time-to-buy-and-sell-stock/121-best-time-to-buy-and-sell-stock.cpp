@@ -1,17 +1,20 @@
 class Solution {
 public:
-    int maxProfit(vector<int>& nums) {
+    int maxProfit(vector<int>& prices) {
         
-        //so iwill be traking the min_price till date
-        int min_price=nums[0];
-        int max_profit=0;
+        int n=prices.size();
         
-        for(int i=0;i<nums.size();i++)
+        int mini=prices[0];
+        
+        int profit=INT_MIN;
+        
+        for(int i=0;i<n;i++)
         {
-            min_price=min(min_price,nums[i]);
+            mini=min(mini,prices[i]);
             
-            max_profit=max(max_profit,nums[i]-min_price);
+            profit=max(profit,prices[i]-mini);
         }
-        return max_profit;
+        
+        return profit;
     }
 };
