@@ -1,7 +1,10 @@
 class Solution {
 public:
     //concept is that 
+    
     //if we want A=B*C then B<A and C<A(that why we sort it )
+    //and A%B==0 and C=A/B (we use map to check whether we got c or not in our given array)
+    
     long long mod=1e9+7;
     
     int numFactoredBinaryTrees(vector<int>& arr) {
