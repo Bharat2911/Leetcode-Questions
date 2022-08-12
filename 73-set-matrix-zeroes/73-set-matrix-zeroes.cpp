@@ -5,8 +5,8 @@ public:
         int row=matrix.size();
         int col=matrix[0].size();
         
-        vector<int>r(row,2);
-        vector<int>c(col,2);
+        vector<int>r(row,-1);
+        vector<int>c(col,-1);
         
         for(int i=0;i<row;i++)
         {
@@ -16,7 +16,6 @@ public:
                 {
                     r[i]=0;
                     c[j]=0;
-                    
                 }
             }
         }
@@ -30,6 +29,7 @@ public:
                     matrix[i][j]=0;
                 }
             }
+
         }
     }
 };
