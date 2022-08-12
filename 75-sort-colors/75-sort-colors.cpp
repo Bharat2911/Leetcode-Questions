@@ -1,36 +1,35 @@
-class Solution
-{
-    public:
-       	//pointer approach 
-
-        void sortColors(vector<int> &nums)
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        
+        //mid->0 swao(low,mid)low++ mid++
+        //mid->1  mid++
+        //mid->2 swap(mid,high)high--
+        
+        int n=nums.size();
+        
+        int mid=0;
+        int low=0;
+        
+        int high=n-1;
+        
+        while(mid<=high)
         {
-
-           	//two approaches
-           	//1-> o(n),O(n)
-           	//2->O(n).O(1)
-
-            int n = nums.size();
-
-            int low = 0;
-            int mid = 0;
-            int high = n - 1;
-
-            while (mid <= high)
+            if(nums[mid]==0)
             {
-                switch (nums[mid])
-                {
-                    case 0:
-                        swap(nums[low++], nums[mid++]);
-                        break;
-                    case 1:
-                        mid++;
-                        break;
-
-                    case 2:
-                        swap(nums[mid], nums[high--]);
-                        break;
-                }
+                swap(nums[low],nums[mid]);
+                low++;
+                mid++;
+            }
+            else if(nums[mid]==1)
+            {
+                mid++;
+            }
+            else
+            {
+                swap(nums[mid],nums[high]);
+                high--;
             }
         }
+    }
 };
