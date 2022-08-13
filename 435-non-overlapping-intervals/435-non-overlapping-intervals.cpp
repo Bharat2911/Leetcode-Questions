@@ -7,13 +7,14 @@ public:
         sort(intervals.begin(),intervals.end());
         
         int previous=0;
+        
         int count=0;
         
         for(int current=1;current<n;current++)
         {
             if(intervals[previous][1]>intervals[current][0])
             {
-                //we ar ehaving the overlapping intervals int this 
+                //we have to remove
                 count++;
                 
                 if(intervals[previous][1]>intervals[current][1])
@@ -26,7 +27,6 @@ public:
                 previous=current;
             }
         }
-        
         return count;
     }
 };
