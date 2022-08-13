@@ -1,47 +1,29 @@
-class Solution
-{
-    public:
-        void remove(vector<int> &nums)
+class Solution {
+public:
+    int firstMissingPositive(vector<int>& nums) {
+        
+        int n=nums.size();
+        
+        int count=1;
+        
+        //rather thnan sorting use the map that willl tackel the case of duplicates also
+        
+        map<int,int>map;//thsi store in sorted order itself
+        
+        for(auto itr:nums)
         {
-           	//nums is sorted actually
-
-            int n = nums.size();
-            // sort(nums.begin(), nums.end());
-
-            int current = nums[0];
-            for (int i = 1; i < nums.size(); i++)
-            {
-                if (current == nums[i])
-                {
-                    nums.erase(nums.begin() + i);
-                    i--;
-                }
-                current = nums[i];
-            }
+            map[itr]++;
         }
-    int firstMissingPositive(vector<int> &nums)
-    {
-       	//if we have the duplicates then we have to remove those duplicates
-
-        int count = 1;
-
-        sort(nums.begin(), nums.end());
-
-        remove(nums);
-
-        for (auto itr: nums)
+        
+        for(auto itr:map)
         {
-            if (itr < 1) continue;
-
-            else if (itr != count)
-            {
-                return count;
-            }
-            else
-            {
-                count++;
-            }
+            if(itr.first<1)continue;
+            
+            else if(itr.first!=count)return count;
+            
+            else count++;
         }
-        return count;
+        
+        return  count;
     }
 };
