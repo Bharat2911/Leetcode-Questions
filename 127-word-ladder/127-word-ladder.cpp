@@ -20,7 +20,7 @@ class Solution
         {
 
            	//i want to make the adj list and i will make in using the map
-            unordered_map<string, vector < string>> adj;
+           map<string, vector < string>> adj;
 
            	//will itrate in the word list and fill the map
             int n = wordList.size();
