@@ -4,7 +4,7 @@ class Solution
         int calculate(string s)
         {
 
-            int n = s.length();
+           int n = s.length();
 
             int digit = 0;
             int sign = +1;
@@ -61,6 +61,5 @@ class Solution
                 }
             }
             return ans;
-            
         }
 };
