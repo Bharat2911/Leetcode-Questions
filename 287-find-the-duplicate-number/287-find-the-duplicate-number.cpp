@@ -2,18 +2,21 @@ class Solution {
 public:
     int findDuplicate(vector<int>& nums) {
         
-        unordered_map<int,int>map;
+       //if the particular elemnt is already seen before means it is repeating 
         
-        for(auto itr:nums)
-        {
-            map[itr]++;
-        }
+        int n=nums.size();
         
-        for(auto itr:map)
+        vector<int>vis(n+1,0);
+        
+        for(int i=0;i<n;i++)
         {
-            if(itr.second>1)
+            if(!vis[nums[i]])
             {
-                return itr.first;
+                vis[nums[i]]=1;
+            }
+            else
+            {
+                return nums[i];
             }
         }
         return -1;
