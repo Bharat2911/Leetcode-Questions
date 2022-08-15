@@ -2,23 +2,29 @@ class Solution {
 public:
     int findDuplicate(vector<int>& nums) {
         
-       //if the particular elemnt is already seen before means it is repeating 
-        
+        //we can also do this using the cycle detection method
         int n=nums.size();
         
-        vector<int>vis(n+1,0);
+        int slow=nums[0];
+        int fast=nums[0];
         
-        for(int i=0;i<n;i++)
+        while(true)
         {
-            if(!vis[nums[i]])
+            fast=nums[nums[fast]];//move by two
+            slow=nums[slow];//move by one
+            
+            if(fast==slow)
             {
-                vis[nums[i]]=1;
-            }
-            else
-            {
-                return nums[i];
+                fast=nums[0];
+                
+                while(fast!=slow)
+                {
+                    slow=nums[slow];
+                    fast=nums[fast];
+                }
+                return fast;
             }
         }
-        return -1;
+        
     }
 };
