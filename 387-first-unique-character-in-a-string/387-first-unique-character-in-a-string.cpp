@@ -1,20 +1,24 @@
-class Solution {
-public:
-    int firstUniqChar(string s) {
-        
-       unordered_map<char,int>map;
-        for(auto itr: s)
+class Solution
+{
+    public:
+        int firstUniqChar(string s)
+        {
+
+            vector<int> freq(26, 0);
+
+            for (auto itr: s)
             {
-            map[itr]++;
-        }
-        for(int i=0;i<s.length();i++)
-            {
-            if(map[s[i]]==1)
-                {
-                return i;
-                break;
+                freq[itr - 'a']++;	//askii value
             }
+
+            for (int i = 0; i < s.length(); i++) 
+            {
+                if(freq[s[i]-'a']==1)
+                {
+                    return i;
+                    break;
+                }
+            }
+            return -1;
         }
-        return -1;
-    }
 };
