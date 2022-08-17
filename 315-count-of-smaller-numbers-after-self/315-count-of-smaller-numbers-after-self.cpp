@@ -1,6 +1,6 @@
 class Solution {
 public:
-    void merge(int low,int mid,int high,vector<pair<int,int>>&arr,vector<int>&ans)
+     void merge(int low,int mid,int high,vector<pair<int,int>>&arr,vector<int>&ans)
     {
         vector<pair<int,int>>temp(high-low+1);
         
