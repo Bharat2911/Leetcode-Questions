@@ -3,16 +3,16 @@ public:
     int romanToInt(string s) {
         
         unordered_map<char,int>map;
-            
-            int n=s.length();
         
-            map.insert({'I',1});
-         map.insert({'V',5});
-         map.insert({'X',10});
-         map.insert({'L',50});
-         map.insert({'C',100});
-         map.insert({'D',500});
-         map.insert({'M',1000});
+        map.insert({'I',1});
+        map.insert({'V',5});
+        map.insert({'X',10});
+        map.insert({'L',50});
+        map.insert({'C',100});
+        map.insert({'D',500});
+        map.insert({'M',1000});
+        
+        int n=s.length();
         
         int ans=map[s[n-1]];
         
@@ -26,6 +26,7 @@ public:
             {
                 ans+=map[s[i]];
             }
+
         }
         return ans;
     }
