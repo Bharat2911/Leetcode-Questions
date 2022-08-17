@@ -10,29 +10,29 @@
  */
 class Solution {
 public:
-    // /to handel that edge case we will make one condition
     int length(ListNode*head)
     {
         ListNode*curr=head;
         
-        int len=0;
+        int l=0;
         
         while(curr!=NULL)
         {
-            len++;
+            l++;
             curr=curr->next;
         }
-        return len;
+        
+        return l;
+        
     }
     ListNode* reverseKGroup(ListNode* head, int k) {
         
-        //just for the edge case we need the length here
         int len=length(head);
         
-        if(len<k)
-        {
-            return head;
-        }
+        if(len<k)return head;//base case
+        
+        //reverse the first k node using itrative method then apply recursive 
+        
         ListNode*curr=head;
         ListNode*prev=NULL;
         ListNode*next;
@@ -48,12 +48,12 @@ public:
             count++;
         }
         
-        //now send the recursion int th enext part
-        if(next!=NULL)
+        if(next)
         {
-             head->next=reverseKGroup(next,k);
+            head->next=reverseKGroup(next,k);
         }
-       
+        
         return prev;
+        
     }
 };
