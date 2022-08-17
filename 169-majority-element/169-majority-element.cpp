@@ -2,27 +2,18 @@ class Solution {
 public:
     int majorityElement(vector<int>& nums) {
         
-        //t.c->o(n)
-        //s.c->o(n);
-        
-        
-        
+        //majority_elemnt jo bhi hoga vo maximum times apperar ho rha hoga or in sort vo maximum space occupy kar rha hoga
         int n=nums.size();
+        int count=0;
+        int ele=0;
         
-        unordered_map<int,int>map;
-        
-        for(auto itr:nums)
+        for(int i=0;i<n;i++)
         {
-            map[itr]++;
+            if(count==0)ele=nums[i];
+            
+            if(ele==nums[i])count++;
+            else count--;
         }
-        
-        for(auto itr:map)
-        {
-            if(itr.second>n/2)
-            {
-                return itr.first;
-            }
-        }
-        return -1;
+        return ele;
     }
 };
