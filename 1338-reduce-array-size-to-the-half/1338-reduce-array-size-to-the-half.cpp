@@ -1,6 +1,7 @@
 class Solution
 {
     public:
+    //htink greedly -> add the most frequent element followed next most frequent element and so on 
         int minSetSize(vector<int> &arr)
         {
 
@@ -24,7 +25,7 @@ class Solution
             }
 
             int count = 0;
-            int ans=0;
+            vector<int>ans;
             
 
             while (!pq.empty() )
@@ -35,10 +36,10 @@ class Solution
                 pq.pop();
                 
                 count+=freq;
-                ans++;
+                ans.push_back(ele);
                 
-                if(count>=n/2)return ans;
+                if(count>=n/2)return ans.size();
             }
-            return ans;
+            return ans.size();
         }
 };
