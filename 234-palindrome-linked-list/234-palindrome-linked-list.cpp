@@ -1,51 +1,51 @@
 /**
- *Definition for singly-linked list.
- *struct ListNode {
- *    int val;
- *    ListNode * next;
- *    ListNode() : val(0), next(nullptr) {}
- *    ListNode(int x) : val(x), next(nullptr) {}
- *    ListNode(int x, ListNode *next) : val(x), next(next) {}
- *};
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
  */
-class Solution
-{
-    public:
-        ListNode* reverse(ListNode *head)
-        {
-            ListNode *curr = head;
-            ListNode *prev = NULL;
-            ListNode * next;
-
-            while (curr != NULL)
-            {
-                next = curr->next;
-                curr->next = prev;
-                prev = curr;
-                curr = next;
-            }
-            return prev;
-        }
-    bool isPalindrome(ListNode *head)
+class Solution {
+public:
+    //function for reversing the linked list
+    ListNode*reverse(ListNode*head)
     {
-
-        ListNode *slow = head;
-        ListNode *fast = head;
-
-        while (fast != NULL and fast->next != NULL)
+        ListNode*curr=head;
+        ListNode*prev=NULL;
+        ListNode*next;
+        
+        while(curr!=NULL)
         {
-            slow = slow->next;
-            fast = fast->next->next;
+            next=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=next;
         }
-
-        ListNode *head2 = reverse(slow);
-
-        while (head != NULL and head2 != NULL) 
+        return prev;
+        
+    }
+    bool isPalindrome(ListNode* head) {
+        
+        ListNode*slow=head;
+        ListNode*fast=head;
+        
+        while(fast!=NULL and fast->next!=NULL)
         {
-            if(head->val==head2->val)
+            fast=fast->next->next;
+            slow=slow->next;
+            
+        }
+        ListNode*prev=reverse(slow);
+        
+        while(head!=NULL and prev!=NULL)
+        {
+            if(head->val==prev->val)
             {
                 head=head->next;
-                head2=head2->next;
+                prev=prev->next;
             }
             else
             {
