@@ -4,32 +4,37 @@ public:
         
         int n=height.size();
         
+        int left=0;
+        int right=0;
+        
         int i=0;
         int j=n-1;
         
-        int left_max=0;
-        int right_max=0;
+        int ans=0;
         
-        int area=0;
         
         while(i<j)
         {
-            left_max=max(left_max,height[i]);
+            left=max(left,height[i]);
             
-            right_max=max(right_max,height[j]);
+            right=max(right,height[j]);
             
             
-            if(left_max>right_max)
+            if(left>right)
             {
-                area+=right_max-height[j];
+                ans+=right-height[j];
                 j--;
+                cout<<ans<<" ";
             }
-            else
+              // cout<<endl;
+            else 
             {
-                area+=left_max-height[i];
+                ans+=left-height[i];
                 i++;
+                
+                cout<<ans<<" ";
             }
         }
-        return area;
+        return ans;
     }
 };
