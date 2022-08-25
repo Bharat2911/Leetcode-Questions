@@ -1,11 +1,15 @@
 class Solution {
 public:
+    int dp[21][21];
+    
     int solve(vector<int>&nums,int i,int j)
     {
         if(i>j)
         {
             return 0;
         }
+        
+        if(dp[i][j]!=-1)return dp[i][j];
         
 //when p1 pick from either end then player 2 can pick from starting end or ending end from the   remaning array , player 2 will try to pick the maximum and try to give us the minimum in order to win
         
@@ -14,7 +18,7 @@ public:
         
         int end=nums[j]+min(solve(nums,i+1,j-1),solve(nums,i,j-2));//when p2 pick from ending end
         
-        return max(start,end);
+        return dp[i][j]=max(start,end);
         
     }
     bool PredictTheWinner(vector<int>& nums) {
@@ -30,6 +34,8 @@ public:
             total_sum+=itr;
             
         }
+        
+        memset(dp,-1,sizeof dp);
         
         int score_p1=solve(nums,i,j);
         
