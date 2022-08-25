@@ -16,7 +16,7 @@ public:
         
         int start=nums[i]+min(solve(nums,i+2,j),solve(nums,i+1,j-1));//when p1 pick from starting end 
         
-        int end=nums[j]+min(solve(nums,i+1,j-1),solve(nums,i,j-2));//when p2 pick from ending end
+        int end=nums[j]+min(solve(nums,i+1,j-1),solve(nums,i,j-2));//when p1 pick from ending end
         
         return dp[i][j]=max(start,end);
         
