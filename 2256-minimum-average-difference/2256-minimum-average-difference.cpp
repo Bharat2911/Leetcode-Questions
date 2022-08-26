@@ -27,7 +27,7 @@ class Solution
             {
                 suf[i] = suf[i + 1] + nums[i];
             }
-           	// cout << endl;
+           	
             vector<long long> ans(n);
 
             for (long long i = 0; i < n-1; i++)
@@ -41,20 +41,6 @@ class Solution
             pre[n-1]=sum/n;
             suf[n-1]=0;
             
-//             for(auto itr:pre)
-//             {
-//                 cout<<itr<<" ";
-//             }
-//             cout<<endl;
-            
-//             for(auto itr:suf)
-//             {
-//                 cout<<itr<<" ";
-//             }
-            
-//             cout<<endl;
-            
-
          for(long long i=0;i<n;i++)
          {
              ans[i]=abs(pre[i]-suf[i]);
