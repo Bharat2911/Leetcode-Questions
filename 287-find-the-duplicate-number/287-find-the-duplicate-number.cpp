@@ -1,8 +1,7 @@
 class Solution {
 public:
     int findDuplicate(vector<int>& nums) {
-        
-        //we can also do this using the cycle detection method
+     
         int n=nums.size();
         
         int slow=nums[0];
@@ -10,21 +9,23 @@ public:
         
         while(true)
         {
-            fast=nums[nums[fast]];//move by two
-            slow=nums[slow];//move by one
+            slow=nums[slow];
+            fast=nums[nums[fast]];
             
-            if(fast==slow)
+            if(slow==fast)
             {
                 fast=nums[0];
                 
                 while(fast!=slow)
                 {
-                    slow=nums[slow];
                     fast=nums[fast];
+                    slow=nums[slow];
+                    
+                    
                 }
-                return fast;
+                return slow;
             }
         }
-        
+        return -1;
     }
 };
