@@ -1,28 +1,34 @@
 class Solution {
 public:
-      void solve(int idx, vector<int> &nums, vector<vector< int>> &ans)
+    void solve(int idx,vector<int>&nums,vector<vector<int>>&ans)
     {
-       	//base case
-        if (idx == nums.size())
+        if(idx==nums.size())
         {
             ans.push_back(nums);
             return;
         }
-
-        for (int i = idx; i < nums.size(); i++)
+        
+        for(int i=idx;i<nums.size();i++)
         {
+            swap(nums[i],nums[idx]);
             
-                swap(nums[idx], nums[i]);
-                solve(idx + 1, nums, ans);
-                swap(nums[idx], nums[i]);	//backtraking step;
+            solve(idx+1,nums,ans);
+            
+            swap(nums[i],nums[idx]);//this is pure backtraking step
             
         }
     }
     vector<vector<int>> permute(vector<int>& nums) {
-         vector<vector < int>> ans;
-
-        solve(0, nums, ans);
-
+        
+        int n=nums.size();
+        
+        vector<vector<int>>ans;
+        
+        
+        int idx=0;
+        
+        solve(idx,nums,ans);
+        
         return ans;
     }
 };
