@@ -2,52 +2,46 @@ class Solution {
 public:
     bool ispal(string&s,int low,int high)
     {
-        while(low<high)
+        while(low<=high)
         {
             if(s[low++]!=s[high--])
             {
-                return  false;
+                return false;
             }
         }
         return true;
-    }
-    void solve(int index,string &s,vector<vector<string>>&ans,vector<string>&res)
-    {
-        //base condtition
-        ///followed by choice diagram 
-        //forllowed by ans
         
-        if(index==s.length())
+    }
+    void solve(int idx,string&s,vector<vector<string>>&ans,vector<string>&res)
+    {
+        if(idx==s.length())
         {
             ans.push_back(res);
-            
             return;
         }
         
-        //try each and every partition and check itis plaindrome or not
-        
-        for(int i=index;i<s.length();i++)
+        for(int i=idx;i<s.length();i++)
         {
-            //if its is palindrome then we got out ans
-            if(ispal(s,index,i))
+            if(ispal(s,idx,i))
             {
-                res.push_back(s.substr(index,i-index+1));
+                res.push_back(s.substr(idx,i-idx+1));
                 
                 solve(i+1,s,ans,res);
                 
-                res.pop_back();//backtraking step 
+                res.pop_back();
             }
         }
     }
     vector<vector<string>> partition(string s) {
         
-        int index=0;
         vector<vector<string>>ans;
         vector<string>res;
         
-        solve(index,s,ans,res);
+        int idx=0;
         
+        solve(idx,s,ans,res);
         
         return ans;
+         
     }
 };
