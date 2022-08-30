@@ -1,40 +1,37 @@
-class Solution
-{
-    public:
-        int dp[301];
+class Solution {
+public:
+    int dp[301];
     
-        bool solve(int index, string &A, vector<string> &B)
-        {
-           	//base case
-            if (index == A.length())
-            {
-                return true;
-            }
-            if(dp[index]!=-1)
-            {
-                return dp[index];
-            }
-            for (auto itr: B)
-            {
-                int l = itr.length();
-
-               	// a ki same length ke substr
-                string str = A.substr(index, l);
-
-                if (str == itr)
-                {
-                    if (solve(index + l, A, B)) return dp[index]=true;
-                }
-            }
-            return dp[index]=false;
-        }
-    bool wordBreak(string s, vector<string> &wd)
+    bool solve(int idx,string&s,vector<string>&w)
     {
-
-       	//writing the recursive function
-       memset(dp,-1,sizeof dp);
-        int index = 0;
-
-        return solve(index, s, wd);
+        if(idx==s.length())
+        {
+            return true;
+        }
+        
+        if(dp[idx]!=-1)return dp[idx];
+        
+        for(auto itr:w)
+        {
+            int l=itr.length();
+            
+            string str=s.substr(idx,l);
+            
+            if(str==itr)
+            {
+                if(solve(idx+l,s,w)) return dp[idx]=true;
+            }
+        }
+        
+        return dp[idx]=false;
+    }
+    bool wordBreak(string s, vector<string>& w) {
+        
+        int idx=0;
+        
+        memset(dp,-1,sizeof dp);
+        
+        return solve(idx,s,w);
+        
     }
 };
