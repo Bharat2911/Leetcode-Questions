@@ -11,41 +11,24 @@
  */
 class Solution {
 public:
+    int solve(TreeNode*root)
+    {
+        if(root==NULL)return 0;
+        
+        int left=solve(root->left);
+        
+        int right=solve(root->right);
+        
+        return max(left,right)+1;
+    }
     int maxDepth(TreeNode* root) {
-      
-        //simply count the levels using level order traversal
         
-        if(root==NULL)
-        {
-            return 0;
-        }
+        //jitni totallevels hai vo anse has
+         if(root==NULL)
+         {
+             return 0;
+         }
         
-        queue<TreeNode*>q;
-        
-        q.push(root);
-        
-        int count=0;
-        
-        while(!q.empty())
-        {
-            int sz=q.size();
-            count++;
-            
-            while(sz--)
-            {
-                TreeNode*node=q.front();
-                q.pop();
-                
-                if(node->left)
-                {
-                    q.push(node->left);
-                }
-                if(node->right)
-                {
-                    q.push(node->right);
-                }
-            }
-        }
-        return count;
+        return solve(root);
     }
 };
