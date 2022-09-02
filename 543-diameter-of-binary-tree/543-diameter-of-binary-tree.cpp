@@ -19,21 +19,19 @@ public:
         {
             return 0;
         }
+        
         int left=height(root->left);
         int right=height(root->right);
         
-        ans=max(left+right,ans);
+        ans=max(ans,left+right);
         
         return max(left,right)+1;
     }
     int diameterOfBinaryTree(TreeNode* root) {
+     
+        if(root==NULL)return 0;
         
-        if(root==NULL)
-        {
-            return 0;
-        }
-        
-        height(root);
+       height(root);
         
         return ans;
     }
