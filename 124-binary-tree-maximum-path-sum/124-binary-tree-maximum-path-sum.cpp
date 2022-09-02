@@ -22,12 +22,12 @@ public:
         int left=max(0,solve(root->left));
         int right=max(0,solve(root->right));
         
-        ans=max(ans,left+right+root->val);
+        ans=max(ans,root->val+left+right);
         
         return root->val+max(left,right);
     }
     int maxPathSum(TreeNode* root) {
-         
+        
         if(root==NULL)
         {
             return 0;
