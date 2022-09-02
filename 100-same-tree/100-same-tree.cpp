@@ -11,36 +11,27 @@
  */
 class Solution {
 public:
-   bool matching(TreeNode *root, TreeNode *shoot)
+    bool solve(TreeNode*p,TreeNode*q)
     {
-       	//couple of base cases
-
-        if (root == NULL and shoot == NULL)
+        if(p==NULL and q==NULL)
         {
             return true;
         }
-        if (root == NULL || shoot == NULL)
+        if(p==NULL || q==NULL)
         {
             return false;
         }
-
-        if (root != NULL and shoot != NULL)
+        
+        if(p->val!=q->val)
         {
-           	//then we will check if the value match or ot
-
-            bool left = matching(root->left, shoot->left);
-            bool right = matching(root->right, shoot->right);
-
-            if (root->val == shoot->val and left and right)
-            {
-                return true;
-            }
+            return false;
         }
-        return false;
+        
+        return solve(p->left,q->left) and solve(p->right,q->right);
+        
     }
     bool isSameTree(TreeNode* p, TreeNode* q) {
         
-        
-        return matching(p,q);
+        return solve(p,q);
     }
 };
