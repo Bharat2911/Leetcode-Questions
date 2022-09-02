@@ -11,11 +11,16 @@
  */
 class Solution {
 public:
-    
-    //we will be doing this using morish traversal
     vector<int> inorderTraversal(TreeNode* root) {
         
-        vector<int>inorder;
+        //we will be doing this using morish traversal
+        vector<int>ans;
+        
+        if(root==NULL)
+        {
+            return ans;
+            
+        }
         
         TreeNode*curr=root;
         
@@ -23,7 +28,7 @@ public:
         {
             if(curr->left==NULL)
             {
-                inorder.push_back(curr->val);
+                ans.push_back(curr->val);
                 curr=curr->right;
             }
             else
@@ -39,18 +44,15 @@ public:
                 {
                     prev->right=curr;
                     curr=curr->left;
-                    
                 }
                 else
                 {
                     prev->right=NULL;
-                    
-                    inorder.push_back(curr->val);
-                    
+                    ans.push_back(curr->val);
                     curr=curr->right;
                 }
             }
         }
-        return inorder;
+        return ans;
     }
 };
