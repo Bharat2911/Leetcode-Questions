@@ -17,9 +17,10 @@ public:
         
         int idx=(lb+ub)/2;
         
-        TreeNode*root=new TreeNode (nums[idx]);
+        TreeNode*root=new TreeNode(nums[idx]);
         
         root->left=solve(nums,lb,idx-1);
+        
         root->right=solve(nums,idx+1,ub);
         
         return root;
