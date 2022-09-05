@@ -11,41 +11,40 @@
  */
 class BSTIterator {
 public:
-    priority_queue<int,vector<int>,greater<int>>pq;
     
-    void inorder(TreeNode*root)
+    queue<int>q;
+    
+    void solve(TreeNode*root)
     {
-        if(root==NULL)
-        {
-            return;
-        }
+        if(root==NULL)return;
         
-        inorder(root->left);
+        solve(root->left);
         
-        pq.push(root->val);
+        q.push(root->val);
         
-        inorder(root->right);
+        solve(root->right);
         
     }
+    
     BSTIterator(TreeNode* root) {
         
-        inorder(root);
+       solve(root);
         
     }
     
     int next() {
         
-        int top=pq.top();
-        pq.pop();
+       int top=q.front();
+        q.pop();
+        
         
         return top;
-        
     }
     
     bool hasNext() {
         
-        return pq.size();
-        
+        if(q.size()>0)return true;
+        return false;
     }
 };
 
