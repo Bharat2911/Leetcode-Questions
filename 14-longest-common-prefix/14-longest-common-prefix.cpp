@@ -2,28 +2,30 @@ class Solution {
 public:
     string longestCommonPrefix(vector<string>& strs) {
         
-        //good point 
-        //agar bahar hi length define kar dung to lentgh to beta same rahegi na par apan strign str to keep on changing haina
-       int n=strs.size();
         
-        string str=strs[0];
+        string res=strs[0];
         
+        int i=0;
         
-        
-        for(int i=1;i<n;i++)
+        while(i<strs.size())
         {
-            string res="";
-            
             int j=0;
-                
-            while(j<str.length() and strs[i][j]==str[j])
+            
+            string ans;
+            
+            int l=res.length();
+            
+            
+            while(j<l and res[j]==strs[i][j])
             {
-                res+=str[j];
+                ans+=res[j];
                 j++;
             }
-            str=res;
+            
+            res=ans;
+            i++;
         }
         
-        return str;
+        return res;
     }
 };
