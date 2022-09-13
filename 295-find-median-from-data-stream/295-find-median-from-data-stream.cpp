@@ -1,56 +1,64 @@
-class MedianFinder {
-public:
-    //make the min heap as well as max heap itrs important boy
-    priority_queue<int>max_pq;//max heap
-    
-    priority_queue<int,vector<int>,greater<int>>min_pq;//this is min heap
-    
-    MedianFinder() {
-        
-    }
-    
-    void addNum(int num) {
-        
-        if(max_pq.empty() || num<max_pq.top())
+class MedianFinder
+{
+    public:
+       	//make two heaps min heap and max heap
+        priority_queue<int> pmax;
+    priority_queue<int, vector < int>, greater < int>> pmin;
+
+    MedianFinder() {}
+
+    void addNum(int num) 
+    {
+        if(pmax.empty() || num<pmax.top())
         {
-            max_pq.push(num);
+            pmax.push(num);
         }
         else
         {
-            min_pq.push(num);
+            pmin.push(num);
         }
         
-        if(min_pq.size()>max_pq.size()+1)
+        if(pmax.size()>pmin.size()+1)
         {
-            max_pq.push(min_pq.top());
-            min_pq.pop();
+            int x=pmax.top();
+            pmax.pop();
+            
+            pmin.push(x);
         }
-        else if(max_pq.size()>min_pq.size()+1)
+        else if(pmin.size()>pmax.size()+1)
+            
         {
-            min_pq.push(max_pq.top());
-            max_pq.pop();
+            int y=pmin.top();
+            pmin.pop();
+            
+            pmax.push(y);
         }
+            
+            
+        
     }
-    
-    double findMedian() {
-        
-        if(max_pq.size() == min_pq.size()){
-           return (max_pq.top() + min_pq.top()) / 2.0;
-       }
-        else{
-            if(max_pq.size() > min_pq.size()){
-                return max_pq.top();
-            }else{
-                return min_pq.top();
-            }
+
+    double findMedian()
+    {
+
+        if (pmax.size() == pmin.size())
+        {
+            return (pmax.top() + pmin.top()) / 2.0;
         }
-       
+        else if (pmax.size() > pmin.size())
+        {
+            return pmax.top();
+        }
+        else 
+        {
+            return pmin.top();
+        }
     }
 };
 
 /**
- * Your MedianFinder object will be instantiated and called as such:
- * MedianFinder* obj = new MedianFinder();
- * obj->addNum(num);
- * double param_2 = obj->findMedian();
+ *Your MedianFinder object will be instantiated and called as such:
+ *MedianFinder* obj = new MedianFinder();
+ *obj->addNum(num);
+ *double param_2 = obj->findMedian();
  */
