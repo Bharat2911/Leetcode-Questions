@@ -1,9 +1,8 @@
 class Solution {
 public:
-    void solve(int i,int j,vector<vector<char>>&grid,vector<vector<int>>&vis,int row,int col)
+    void solve(int i,int j,int row,int col,vector<vector<char>>&grid,vector<vector<int>>&vis)
     {
         queue<pair<int,int>>q;
-        
         vis[i][j]=1;
         q.push({i,j});
         
@@ -14,7 +13,6 @@ public:
         {
             int x=q.front().first;
             int y=q.front().second;
-            
             q.pop();
             
             for(int idx=0;idx<4;idx++)
@@ -35,9 +33,10 @@ public:
         int row=grid.size();
         int col=grid[0].size();
         
-        int count=0;
         
         vector<vector<int>>vis(row,vector<int>(col,0));
+        
+        int count=0;
         
         for(int i=0;i<row;i++)
         {
@@ -46,8 +45,10 @@ public:
                 if(!vis[i][j] and grid[i][j]=='1')
                 {
                     count++;
-                    solve(i,j,grid,vis,row,col);
+                    
+                    solve(i,j,row,col,grid,vis);
                 }
+                
             }
         }
         return count;
