@@ -1,27 +1,27 @@
-class Solution
-{
-    public:
-        int lengthOfLIS(vector<int> &arr)
+class Solution {
+public:
+    //T.C=O(n log n)
+    // /s.C=O(1)
+    int lengthOfLIS(vector<int>& nums) {
+        
+        vector<int>temp;
+        
+        temp.push_back(nums[0]);
+        
+        for(int i=1;i<nums.size();i++)
         {
-            int n=arr.size();
-            
-            vector<int> dp(n, 1);
-
-            for (int i = 1; i < n; i++)
+            if(nums[i]>temp.back())
             {
-                for (int j = 0; j < i; j++)
-                {
-                    if (arr[i] > arr[j] and dp[i] < dp[j] + 1)
-                    {
-                        dp[i] = dp[j] + 1;
-                    }
-                }
+                temp.push_back(nums[i]);
             }
-            int ans = 0;
-            for (int i = 0; i < n; i++)
+            else
             {
-                ans = max(ans, dp[i]);
+                //apply binary search and re write it
+                int idx=lower_bound(temp.begin(),temp.end(),nums[i])-temp.begin();//this will give index
+                
+                temp[idx]=nums[i];
             }
-            return ans;
         }
+        return temp.size();
+    }
 };
