@@ -1,51 +1,48 @@
 class Solution {
-public:
-    bool solve(int idx,vector<int>&nums,int sum,int n,vector<vector<int>>&dp)
+    bool solve(vector<int>&nums,int sum,int n)
     {
-        if(idx==n)
+        int dp[n+1][sum+1];
+        
+        
+        for(int i=0;i<n+1;i++)
         {
-            return false;
+            dp[i][0]=1;
+        }
+        for(int j=1;j<sum+1;j++)
+        {
+            dp[0][j]=0;
         }
         
-        if(dp[idx][sum]!=-1)
+        for(int i=1;i<n+1;i++)
         {
-            return dp[idx][sum];
+            for(int j=1;j<sum+1;j++)
+            {
+                if(nums[i-1]<=j)
+                {
+                    dp[i][j]=dp[i-1][j-nums[i-1]] || dp[i-1][j];
+                }
+                else{
+                    dp[i][j]=dp[i-1][j];
+                }
+            }
         }
+        return dp[n][sum];
         
-        if(sum==0)
-        {
-            return true;
-        }
-        
-        if(nums[idx]<=sum)
-        {
-            return dp[idx][sum]=solve(idx+1,nums,sum-nums[idx],n,dp) || solve(idx+1,nums,sum,n,dp);
-        }
-        else
-        {
-            return dp[idx][sum]=solve(idx+1,nums,sum,n,dp);
-        }
     }
+public:
     bool canPartition(vector<int>& nums) {
-        
-        //recurion
         int n=nums.size();
         
         int sum=0;
         
-        for(auto itr:nums)
+        for(int i=0;i<n;i++)
         {
-            sum+=itr;
+            sum+=nums[i];
         }
         
-        int idx=0;
+        if(sum&1)return false;
         
-        if(sum%2!=0)
-        {
-            return false;
-        }
-        vector<vector<int>>dp(n+1,vector<int>(sum+1,-1));
+        return solve(nums,sum/2,n);
         
-        return solve(idx,nums,sum/2,n,dp);
     }
 };
