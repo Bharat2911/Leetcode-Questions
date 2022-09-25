@@ -1,52 +1,55 @@
-class Solution {
-public:
-    //only i and j are changes
-    int dp[2001][2001];
+class Solution
+{
+    public:
+        
+        int dp[2001][2001];
     
-    bool ispal(string&s,int i,int j)
-    {
-        while(i<=j)
+        bool ispal(string &str, int low, int high)
         {
-            if(s[i++]!=s[j--])
+            while (low <= high)
             {
-                return false;
+                if (str[low++] != str[high--])
+                {
+                    return false;
+                }
             }
+            return true;
         }
-        return true;
-    }
-    int solve(string&s,int i,int j)
+    int solve(int i, int j, string &str)
     {
-        //base case
-        if(i>=j)
+       	//base case
+        if (i > j) return 0;
+
+        if (ispal(str, i, j))	//if given string is already palindrome
         {
             return 0;
         }
-        
-        if(ispal(s,i,j))return 0;
+        int ans = INT_MAX;
         
         if(dp[i][j]!=-1)return dp[i][j];
         
-        int ans=INT_MAX;
-        
-        for(int k=i;k<j;k++)
+        for (int k = i; k < j; k++)
         {
-            if(ispal(s,i,k))
+            if (ispal(str, i, k))
             {
-                int temp=solve(s,i,k)+solve(s,k+1,j)+1;
-                
-                ans=min(ans,temp);
+                int x = 1 + solve(i, k, str) + solve(k + 1, j, str);
+
+                ans = min(ans, x);
             }
         }
         return dp[i][j]=ans;
     }
-    int minCut(string s) {
+    int minCut(string str)
+    {
+
+        int n = str.length();
+
+        int i = 0;
         
-        int n=s.length();
+        int j = n - 1;
         
-        int i=0;
-        int j=n-1;
-        memset(dp,-1,sizeof(dp));
+        memset(dp,-1,sizeof dp);
         
-        return solve(s,i,j);
+        return solve(i, j, str);
     }
 };
