@@ -10,53 +10,28 @@
  */
 class Solution {
 public:
-     int length(ListNode*head)
-    {
-        int l=0;
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
         
-        ListNode*ptr=head;
+        ListNode*ptr1=head;
+        ListNode*ptr2=head;
         
-        while(ptr!=NULL)
+        
+        while(n--)
         {
-            l++;
-            ptr=ptr->next;
+            ptr1=ptr1->next;
         }
-        return l;
         
+        //this is a case when length of linked list and n are equal;
+        if(ptr1==NULL)return ptr2->next;
+        
+        while(ptr1->next!=NULL)
+        {
+            ptr1=ptr1->next;
+            ptr2=ptr2->next;
+        }
+        
+        ptr2->next=ptr2->next->next;
+        
+        return head;
     }
-        ListNode* removeNthFromEnd(ListNode *head, int n)
-        {
-            
-            int l=length(head);
-            
-            if(n>l)
-            {
-                return NULL;
-            }
-            if(n==l)
-            {
-                return head->next;
-            }
-            ListNode *prev = NULL;
-            ListNode *ptr1 = head;
-            ListNode *ptr2 = head;
-
-            int count = 1;
-            
-            while (ptr1 != NULL and count < n)
-            {
-                ptr1 = ptr1->next;
-                count++;
-            }
-           
-            while (ptr1->next != NULL)
-            {
-                prev=ptr2;
-                ptr1 = ptr1->next;
-                ptr2 = ptr2->next;
-            }
-            prev->next=prev->next->next;
-
-            return head;
-        }
 };
