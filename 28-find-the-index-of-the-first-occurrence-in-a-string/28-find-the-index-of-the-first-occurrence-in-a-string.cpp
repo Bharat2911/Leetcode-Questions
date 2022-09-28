@@ -1,48 +1,58 @@
-class Solution
-{
-    public:
-        int strStr(string str, string s)
+class Solution {
+public:
+    vector<int>lps(string&str)
         {
-
-            int k = s.length();
-
-            if (s.length() == 0)
+            int n=str.length();
+            
+            vector<int>v(n,0);
+            
+            int i=1;
+            
+            int j=0;
+            
+            while(i<n)
             {
-                return -1;
-            }
-            if (str.length() == 0 and s.length() == 0)
-            {
-                return 0;
-            }
-            // if (str.length() == s.length())
-            // {
-            //     return 0;
-            // }
-            // if (s.length() > str.length())
-            // {
-            //     return -1;
-            // }
-
-            int i = 0;
-            int j = 0;
-
-            while (j < str.length())
-            {
-                if (j - i + 1 < k)	//case when window not hit
+                if(str[i]==str[j])
                 {
-                    j++;
-                }
-                else if (j - i + 1 == k)	//window get hit so in this case check for the answer
-                {
-                    if (str.substr(i, k) == s)
-                    {
-                       	//means match ho gya and answer aa rha hoga
-                        return i;	//since i is the pointing to the starting character of the string
-                    }
+                    v[i]=j+1;
                     i++;
                     j++;
                 }
+                else
+                {
+                    if(j==0)
+                    {
+                        i++;
+                    }
+                    else
+                    {
+                        j=v[j-1];
+                    }
+                }
             }
-            return -1;
+            return v;
         }
+    int strStr(string haystack, string needle) {
+        
+        string str=needle+"$"+haystack;
+        int n=needle.length();
+        
+        vector<int>arr=lps(str);
+            
+            vector<int>ans;
+            
+            // for(auto itr:arr)
+            // {
+            //     cout<<itr<<" ";
+            // }
+            for(int i=0;i<str.length();i++)
+            {
+                if(arr[i]==n)//means pattern is present
+                {
+                   return i-n-(n-1)-1;
+                }
+                
+            }
+        return -1;
+    }
 };
