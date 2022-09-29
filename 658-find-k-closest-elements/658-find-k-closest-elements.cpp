@@ -5,7 +5,7 @@ public:
         //will solving this using pq
         
         //since if dist is same we will be picking the min element so sort the array so that every time min is picked
-        sort(arr.begin(),arr.end());
+        // sort(arr.begin(),arr.end());
         
         priority_queue<pair<int,int>>pq;//max heap ->{dist,elemnt}
         
