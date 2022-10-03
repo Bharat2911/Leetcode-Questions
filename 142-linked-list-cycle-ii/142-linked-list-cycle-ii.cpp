@@ -10,18 +10,19 @@ class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
         
-        //first check if cycle is present or not then we will check
-        ListNode*fast=head;
         ListNode*slow=head;
+        ListNode*fast=head;
         
         while(fast!=NULL and fast->next!=NULL)
         {
-            fast=fast->next->next;
             slow=slow->next;
+            fast=fast->next->next;
             
-            if(fast==slow)
+            if(slow==fast)
             {
+                
                 fast=head;
+                
                 
                 while(fast!=slow)
                 {
