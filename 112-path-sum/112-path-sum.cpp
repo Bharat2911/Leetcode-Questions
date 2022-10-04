@@ -11,7 +11,9 @@
  */
 class Solution {
 public:
-    void solve(TreeNode*root,unordered_map<int,int>&map,int sum)
+    bool ans=false;
+    
+    void solve(TreeNode*root,int sum,int target)
     {
         if(root==NULL)
         {
@@ -23,28 +25,27 @@ public:
         if(root->left==NULL and root->right==NULL)
         {
             //means we encounter the leaf node
-            map[sum]++;
+           if(sum==target)
+           {
+               ans=true;
+           }
         }
         
-        solve(root->left,map,sum);
-        solve(root->right,map,sum);
+        solve(root->left,sum,target);
+        solve(root->right,sum,target);
         
     }
     bool hasPathSum(TreeNode* root, int targetSum) {
         
         if(root==NULL)return false;
         
-        unordered_map<int,int>map;
+        
         
         int sum=0;
         
-        solve(root,map,sum);
+        solve(root,sum,targetSum);
         
-        if(map.find(targetSum)!=map.end())
-        {
-            return true;
-        }
-        return false;
+        return ans;
         
     }
 };
