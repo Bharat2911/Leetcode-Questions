@@ -1,34 +1,37 @@
-class Solution {
-public:
-    int minAddToMakeValid(string s) {
-        
-        int n=s.length();
-        
-        stack<char>st;
-        
-        int count=0;
-        
-        for(auto itr:s)
+class Solution
+{
+    public:
+        int minAddToMakeValid(string s)
         {
-            if(itr=='(')
-            {
-                st.push(itr);
+            int n = s.length();
 
-            }
-            else if(itr==')' and !st.empty())
+            stack<char> st;
+
+            int count = 0;
+
+            for (auto itr: s)
             {
-                st.pop();
+                if (itr == '(')
+                {
+                    st.push(itr);
+                }
+                else
+                {
+                    if (!st.empty())
+                    {
+                        st.pop();
+                    }
+                    else
+                    {
+                        count++;
+                    }
+                }
             }
-            else if(itr==')' and st.empty())
-            {
-                count++;
+                while (!st.empty())
+                {
+                    st.pop();
+                    count++;
+                }
+                return count;
             }
-        }
-        while(!st.empty())
-        {
-            st.pop();
-            count++;
-        }
-        return count;
-    }
-};
+        };
