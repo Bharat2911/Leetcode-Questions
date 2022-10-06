@@ -11,41 +11,46 @@
  */
 class Solution {
 public:
+    // pre->root->left->right
     unordered_map<int,int>map;
-    int i=0;
+    int index=0;
     
-    TreeNode*solve(vector<int>&pre,vector<int>&in,int lb,int ub)
+    TreeNode*solve(vector<int>&preorder,vector<int>&inorder,int lb,int ub)
     {
-        if(lb>ub)return NULL;
+        //base case
+        if(lb>ub)
+        {
+            return NULL;
+        }
+        TreeNode*root=new TreeNode(preorder[index]);
         
-        TreeNode*root=new TreeNode(pre[i]);
+        int search=map[preorder[index]];
         
-        int idx=map[pre[i]];
+        index++;
         
-        i++;
+        root->left=solve(preorder,inorder,lb,search-1);
         
-        root->left=solve(pre,in,lb,idx-1);
+        root->right=solve(preorder,inorder,search+1,ub);
         
-        root->right=solve(pre,in,idx+1,ub);
         
         return root;
+        
     }
     TreeNode* bstFromPreorder(vector<int>& preorder) {
         
+        int n=preorder.size();
         vector<int>inorder=preorder;
         
         sort(inorder.begin(),inorder.end());
         
-        int n=inorder.size();
-        
-        int lb=0;
-        int ub=n-1;
-        
-        for(int i=0;i<n;i++)
+        for(int i=0;i<inorder.size();i++)
         {
             map[inorder[i]]=i;
         }
         
+        int lb=0;
+        int ub=n-1;
         return solve(preorder,inorder,lb,ub);
+        
     }
 };
