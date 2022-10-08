@@ -2,37 +2,28 @@ class Solution {
 public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
         
-        //brute force linear search T.C O(n*m);
-        //binary searching T.C(logn*m)
+        int row=matrix.size();
         
-        //doing this using binary searching 
+        int col=matrix[0].size();
         
-         int n=matrix.size();
+        int i=0;
+        int j=col-1;
         
-        if(n==0)return false;
-        
-        int m=matrix[0].size();
-        
-        int row=0;
-        int col=m-1;
-        
-        while(row<n and col>=0 )//boundary conditions
-            
+        while(i<row and j>=0)
         {
-            if(matrix[row][col]==target)
+            if(matrix[i][j]==target)
             {
                 return true;
             }
-            else if(matrix[row][col]<target)
+            else if(matrix[i][j]>target)
             {
-                row++;
+                j--;
             }
             else
             {
-                col--;
+                i++;
             }
         }
         return false;
-        
     }
 };
