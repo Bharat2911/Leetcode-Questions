@@ -1,44 +1,46 @@
-// { Driver Code Starts
+//{ Driver Code Starts
 #include<bits/stdc++.h>
 using namespace std;
 
 
- // } Driver Code Ends
+// } Driver Code Ends
 class Solution
 {
     public:
     //Function to return the sorted array.
     vector <int> nearlySorted(int arr[], int num, int k){
         // Your code here
-        //will maintain a min heap here
-        vector<int>ans;
-        
-        // T.C ==O(n log k)
+        //we will apply min heap here
         
         priority_queue<int,vector<int>,greater<int>>pq;
         
+        vector<int>ans;
+        
         for(int i=0;i<num;i++)
         {
-            //push in pq and as soon its size greater than k pop from it ans push top in ans
             pq.push(arr[i]);
             
             if(pq.size()>k)
             {
-                ans.push_back(pq.top());
+                int top=pq.top();
                 pq.pop();
+                
+                ans.push_back(top);
             }
         }
-        //push all the remaining ele in the ans
+        
         while(!pq.empty())
         {
-            ans.push_back(pq.top());
-            pq.pop();
+             int top=pq.top();
+                pq.pop();
+                
+                ans.push_back(top);
         }
         return ans;
     }
 };
 
-// { Driver Code Starts.
+//{ Driver Code Starts.
 
 int main()
  {
@@ -64,4 +66,5 @@ int main()
 	
 	return 0;
 }
-  // } Driver Code Ends
+
+// } Driver Code Ends
