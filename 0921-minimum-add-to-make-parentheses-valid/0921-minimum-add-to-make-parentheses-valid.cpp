@@ -5,8 +5,7 @@ public:
     
     
     int minAddToMakeValid(string s) {
-        
-        int n=s.length();
+       int n=s.length();
         
         stack<char>st;
         
@@ -17,25 +16,22 @@ public:
             if(itr=='(')
             {
                 st.push(itr);
+
             }
-            else
+            else if(itr==')' and !st.empty())
             {
-                if(!st.empty())
-                {
-                    st.pop();
-                }
-                else
-                {
-                    count++;
-                }
+                st.pop();
+            }
+            else if(itr==')' and st.empty())
+            {
+                count++;
             }
         }
         while(!st.empty())
         {
-            count++;
             st.pop();
+            count++;
         }
-        
         return count;
     }
 };
