@@ -1,7 +1,6 @@
 # Nearly sorted
-## Medium 
-<div class="problem-statement">
-                <p></p><p><span style="font-size:18px">Given an array of <strong>n</strong> elements, where each element is at most <strong>k</strong> away from its target position, you need to sort the array optimally.</span></p>
+## Medium
+<div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">Given an array of <strong>n</strong> elements, where each element is at most <strong>k</strong> away from its target position, you need to sort the array optimally.</span></p>
 
 <p><span style="font-size:18px"><strong>Example 1:</strong></span></p>
 
@@ -33,5 +32,4 @@ You are required to complete the&nbsp;method&nbsp;<strong>nearlySorted()</strong
 1 ≤&nbsp;n ≤&nbsp;10<sup>6</sup><br>
 1 ≤&nbsp;k &lt;&nbsp;n<br>
 1 ≤&nbsp;arr<sub>i </sub>≤&nbsp;10<sup>7</sup></span></p>
- <p></p>
-            </div>
+</div>
