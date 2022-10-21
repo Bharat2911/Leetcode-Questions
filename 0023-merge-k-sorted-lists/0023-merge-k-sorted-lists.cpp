@@ -10,46 +10,36 @@
  */
 class Solution {
 public:
-    ListNode*merge(ListNode*head1,ListNode*head2)
-    {
-        if(head1==NULL)
-        {
-            return head2;
-        }
-        if(head2==NULL)
-        {
-            return head1;
-            
-        }
-        ListNode*result=NULL;
+  class MyCmp{
+        public:
+            bool operator()(ListNode *l1,ListNode *l2){
+                return l1->val>l2->val;
+            }
+    };
         
-        if(head1->val>=head2->val)
-        {
-            result=head2;
-            result->next=merge(head1,head2->next);
-        }
-        else
-        {
-            result=head1;
-            result->next=merge(head1->next,head2);
-        }
-        return result;
-    }
+        
     ListNode* mergeKLists(vector<ListNode*>& lists) {
-        
-        if(lists.size()==0)
-        {
-            return NULL;
+        int l=lists.size();
+        priority_queue<ListNode*,vector<ListNode*>,MyCmp>pq;
+        for(int i=0;i<l;i++){
+            if(lists[i]!=NULL){
+                pq.push(lists[i]);
+            }
         }
-        ListNode*head=lists[0];
-        
-        for(int i=1;i<lists.size();i++)
-        {
-            head=merge(head,lists[i]);
+        ListNode *head=new ListNode();
+        ListNode* curr=head;
+        while(!pq.empty()){
+            curr->next=pq.top();
+            curr=curr->next;
+            pq.pop();
+            if(curr->next!=NULL){
+                pq.push(curr->next);
+            }
         }
+        return head->next;
         
-        return head;
+
         
-        
+    
     }
 };
