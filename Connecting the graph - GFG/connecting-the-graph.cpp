@@ -5,85 +5,51 @@ using namespace std;
 
 // } Driver Code Ends
 //User function Template for C++
-class disjoint{
-    
-    public:
-    vector<int>parent;
-    vector<int>size;
-    
-    disjoint(int v)
-    {
-        parent.resize(v+1);
-        size.resize(v+1,1);
-        
-        for(int i=0;i<=v;i++)
-        {
-            parent[i]=i;
-            
-        }
-    }
-    int findparent(int node)
-    {
-        if(node==parent[node])
-        {
-            return node;
-        }
-        
-        return parent[node]=findparent(parent[node]);
-    }
-    
-    void unionbysize(int u,int v)
-    {
-        int pu=findparent(u);
-        
-        int pv=findparent(v);
-        
-        if(pu==pv)return;
-        
-        if(size[pu]<size[pv])
-        {
-            parent[pu]=pv;
-            size[pv]+=size[pu];
-        }
-        else
-        {
-            parent[pv]=pu;
-            size[pu]+=size[pv];
-        }
-    }
-};
+
 class Solution {
   public:
-    int Solve(int n, vector<vector<int>>& connections){
-        // code here
-        disjoint dv(n);
+  void solve(int i,vector<int>adj[],vector<int>&vis)
+    {
+        vis[i]=1;
         
-        //make the adj list
+        for(auto itr:adj[i])
+        {
+            if(!vis[itr])
+            {
+                vis[itr]=1;
+                solve(itr,adj,vis);
+            }
+        }
+    }
+    int Solve(int n, vector<vector<int>>& edge){
+        // code here
+        int m=edge.size();
+        
+        if(m<n-1)return -1;
+        
         vector<int>adj[n];
         
-        int extra_edges=0;
+        vector<int>vis(n,0);
         
-       for(auto itr:connections)
-       {
-           int u=itr[0];
-           int v=itr[1];
-           
-           if(dv.findparent(u)==dv.findparent(v))
-           {
-               extra_edges++;
-           }
-           dv.unionbysize(u,v);
-       }
-        int comp=0;
+        for(int i=0;i<edge.size();i++)
+        {
+            int u=edge[i][0];
+            int v=edge[i][1];
+            
+            adj[u].push_back(v);
+            adj[v].push_back(u);
+        }
+        int count=0;
         
         for(int i=0;i<n;i++)
         {
-            if(dv.parent[i]==i)comp++;
+            if(!vis[i])
+            {
+                count++;
+                solve(i,adj,vis);
+            }
         }
-        int ans=comp-1;
-        
-        if(extra_edges>=ans)return ans;
-        return -1;
+        return count-1;
     }
 };
 
