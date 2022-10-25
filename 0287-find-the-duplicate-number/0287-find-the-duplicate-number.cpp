@@ -2,16 +2,18 @@ class Solution {
 public:
     int findDuplicate(vector<int>& nums) {
         
-        //brute force
+        unordered_map<int,int>map;
         
-        //sort kar du then itrate and find
-        sort(nums.begin(),nums.end());
-        
-        for(int i=0;i<nums.size()-1;i++)
+        for(auto itr:nums)
         {
-            if(nums[i]==nums[i+1])
+            map[itr]++;
+        }
+        
+        for(auto itr:map)
+        {
+            if(itr.second>=2)
             {
-                return nums[i];//since that is my duplicate
+                return itr.first;
             }
         }
         return -1;
