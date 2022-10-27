@@ -13,60 +13,50 @@ class Solution {
 public:
     vector<int> preorderTraversal(TreeNode* root) {
         
-        vector<int>pre;
+         //inorder ->left->root->right
         
-        vector<int>inorder;
+        //morish traversal
         
-        vector<int>post;
+        vector<int>ans;
         
         if(root==NULL)
         {
-            return pre;
-            
+            return ans;
         }
+        TreeNode*curr=root;
         
-        stack<pair<TreeNode*,int>>st;
-        
-        st.push({root,1});
-        
-        while(!st.empty())
+        while(curr!=NULL)
         {
-            int num=st.top().second;
-            TreeNode*node=st.top().first;
-            
-            st.pop();
-            
-            //we only have the cases cover those 3 cases man
-            
-            if(num==1)
+            if(curr->left==NULL)
             {
-                pre.push_back(node->val);
-                num++;
-                
-                st.push({node,num});
-                
-                if(node->left!=NULL)
-                {
-                    st.push({node->left,1});
-                }
-            }
-            else if(num==2)
-            {
-                inorder.push_back(node->val);
-                num++;
-                
-                st.push({node,num});
-                
-                if(node->right!=NULL)
-                {
-                    st.push({node->right,1});
-                }
+                ans.push_back(curr->val);
+                curr=curr->right;
             }
             else
             {
-                post.push_back(node->val);
+                TreeNode*prev=curr->left;
+                
+                while(prev->right!=curr and prev->right!=NULL)
+                {
+                    prev=prev->right;
+                }
+                
+                if(prev->right==NULL)
+                {
+                    //connect the thread
+                    prev->right=curr;
+                     ans.push_back(curr->val);
+                    curr=curr->left;
+                }
+                else
+                {
+                    // break the  thread and get the answe
+                    prev->right=NULL;
+                   
+                    curr=curr->right;
+                }
             }
         }
-        return pre;
+        return ans;
     }
 };
