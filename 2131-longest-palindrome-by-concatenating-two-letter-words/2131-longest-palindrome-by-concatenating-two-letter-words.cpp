@@ -12,27 +12,28 @@ public:
             
             reverse(res.begin(),res.end());
             
-            if(map[res]>0)//measn map me reverse present hia
+            if(map[res]>0)
             {
-                ans+=4;
+                //reverse is present man
                 
+                ans+=4;
                 map[res]--;
             }
             else
             {
                 map[itr]++;
-                //reveres present nahi hai to daal do current element
             }
+
+                
         }
-        //now case of already palindrome
+        
         for(auto itr:map)
         {
             if(itr.first[0]==itr.first[1] and itr.second>0)
             {
-             
-                return ans+2;
+                ans+=2;
                 
-                
+                break;
             }
         }
         return ans;
