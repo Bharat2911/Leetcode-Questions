@@ -2,33 +2,32 @@ class Solution {
 public:
     int maxArea(vector<int>& height) {
         
-        //pani store to minimum height ke beech me hi hoga na bro
         int n=height.size();
         
-        int low=0;
+        int i=0;
         
-        int high=n-1;
+        int j=n-1;
         
-        int ans=0;
+        int ans=INT_MIN;
         
-        while(low<high)
+        while(i<j)
         {
-            int possible_water=min(height[low],height[high]);
+            int level=min(height[i],height[j]);
             
-            int area=possible_water*(high-low);
+            int len=j-i;
             
-            ans=max(ans,area);
+            ans=max(ans,len*level);
             
             
-            //increament the pointersa
-            if(height[low]<height[high])
+            if(height[i]<height[j])
             {
-                low++;
+                i++;
             }
             else
             {
-                high--;
+                j--;
             }
+           
         }
         return ans;
     }
