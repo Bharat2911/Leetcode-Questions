@@ -1,19 +1,32 @@
 class Solution {
 public:
+    //recursion solution
+    int dp[46];
+    
     int solve(int n)
     {
-        vector<int>dp(n+1,0);
-        
-        dp[0]=1;
-        dp[1]=1;
-        
-        for(int i=2;i<n+1;i++)
+        //base case
+        if(n==0)
         {
-            dp[i]=dp[i-1]+dp[i-2];
+            return 1;
         }
-        return dp[n];
+        if(n==1)
+        {
+            return 1;
+        }
+        
+        if(dp[n]!=-1)return dp[n];
+        
+        //cjpice diagram
+        int a=solve(n-1);
+        
+        int b=solve(n-2);
+        
+        return dp[n]=a+b;
     }
     int climbStairs(int n) {
+        
+        memset(dp,-1,sizeof dp);
         
         return solve(n);
     }
