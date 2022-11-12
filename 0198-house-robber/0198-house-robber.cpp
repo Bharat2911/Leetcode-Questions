@@ -1,37 +1,34 @@
 class Solution {
 public:
-    int dp[101];
-    
-    int solve(int idx,vector<int>&nums,int n)
-    {
+    int rob(vector<int>& nums) {
+        
+        int n=nums.size();
+        
         //base case
         
-        if(idx>=n)
+        if(n==0)
         {
             return 0;
         }
+        if(n==1)
+        {
+            return nums[0];
+        }
+        if(n==2)
+        {
+            return max(nums[0],nums[1]);
+        }
         
-        if(dp[idx]!=-1)return dp[idx];
+        vector<int>dp(n,0);
         
-        //now we have two case
-        //case 1->robbed the current house then cant rob the next adjacent house
-        //case 2->dont robbed the current house robbed the next house
+        dp[0]=nums[0];
+        dp[1]=max(nums[0],nums[1]);
         
-        int a=nums[idx]+solve(idx+2,nums,n);
+        for(int i=2;i<n;i++)
+        {
+            dp[i]=max(nums[i]+dp[i-2],dp[i-1]);
+        }
+        return dp[n-1];
         
-        int b=solve(idx+1,nums,n);
-        
-        return dp[idx]=max(a,b);
-        
-    }
-    int rob(vector<int>& nums) {
-        
-        //if robbed current house then cant robberd the house next to it
-        
-        int n=nums.size();
-        int idx=0;
-        memset(dp,-1,sizeof dp);
-        
-        return solve(idx,nums,n);
     }
 };
