@@ -13,7 +13,8 @@ class Solution {
 public:
     int countNodes(TreeNode* root) {
         
-        vector<int>ans;
+        int count=0;
+        
         
         if(root==NULL)
         {
@@ -29,7 +30,7 @@ public:
             TreeNode*node=q.front();
             q.pop();
             
-            ans.push_back(node->val);
+           count++;
             
             if(node->left)
             {
@@ -41,6 +42,7 @@ public:
             }
         }
         
-        return ans.size();
+        return count;
+        
     }
 };
