@@ -1,40 +1,42 @@
-class Solution {
-public:
-    int countSubstrings(string s) {
-        
-        //in that thing i want the max length
-        
-        int n=s.length();
-        if(n==0 || n==1)
+class Solution
+{
+    public:
+        int countSubstrings(string s)
         {
-            return n;
-        }
-        int count=0;
-        
-        for(int i=0;i<n;i++)
-        {
-            //odd len
-            int j=i;
-            int k=i;
-            
-            while(j>=0 and k<n and s[j]==s[k])
+
+            int n = s.length();
+
+            int start = 0;
+            int end = 1;
+            int count = 0;
+
+            for (int i = 0; i < n; i++)
             {
-                j--;
-                k++;
-                count++;
-                
+               	//odd length
+                int low = i ;
+                int high = i;
+
+                while (low >= 0 and high < n and s[low] == s[high])
+                {
+
+                    low--;
+                    high++;
+                    count++;
+                }
+
+               	//even case
+
+                low = i ;
+                high = i+1;
+
+                while (low >= 0 and high < n and s[low] == s[high])
+                {
+
+                    low--;
+                    high++;
+                    count++;
+                }
             }
-            
-            j=i;
-            k=i+1;
-            
-            while(j>=0 and k<n and s[j]==s[k])
-            {
-                j--;
-                k++;
-                count++;
-            }
+            return count;
         }
-        return count;
-    }
 };
