@@ -2,26 +2,31 @@ class Solution {
 public:
     int lengthOfLIS(vector<int>& nums) {
         
+        // approach 3->most optimised approach 
+        //T.C=O(nlogn)
+        //S.C=o(n)
+        
         int n=nums.size();
         
-        vector<int>dp(n+1,1);
+        vector<int>ans;
+        
+        ans.push_back(nums[0]);
         
         for(int i=1;i<n;i++)
         {
-            for(int j=0;j<i;j++)
+            if(nums[i]>ans.back())
             {
-                if(nums[i]>nums[j] and dp[i]<dp[j]+1)
-                {
-                    dp[i]=dp[j]+1;
-                }
+                ans.push_back(nums[i]);
+            }
+            else
+            {
+                int idx=lower_bound(ans.begin(),ans.end(),nums[i])-ans.begin();
+                
+                ans[idx]=nums[i];
             }
         }
-        int ans=INT_MIN;
-        
-        for(int i=0;i<n;i++)
-        {
-            ans=max(ans,dp[i]);
-        }
-        return ans;
+        return ans.size();
+    
+    
     }
 };
