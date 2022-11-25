@@ -2,9 +2,9 @@ class Solution {
 public:
     int lengthOfLIS(vector<int>& nums) {
         
-        // approach 3->most optimised approach 
-        //T.C=O(nlogn)
-        //S.C=o(n)
+//        approach 3->binary search
+        //T.C=O(log n)
+        //S.C=O(n)
         
         int n=nums.size();
         
@@ -26,7 +26,5 @@ public:
             }
         }
         return ans.size();
-    
-    
     }
 };
