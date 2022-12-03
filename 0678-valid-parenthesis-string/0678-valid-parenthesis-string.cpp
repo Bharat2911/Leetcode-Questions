@@ -1,41 +1,55 @@
 class Solution {
 public:
-    //T.C=O(n)
-    //S.C=O(1)
-    
     bool checkValidString(string s) {
         
-        int bal=0;
+        //using the stack if we do it
+        //T.c=O(n)//itrating once in the string
+        //S.C=O(n)//using the stack
+        stack<int>open;
         
-        for(int i=0;i<s.length();i++)
-        {
-            if(s[i]==')')
-            {
-                bal--;
-            }
-            else
-            {
-                bal++;
-                
-            }
-            if(bal<0)
-            {
-                return false;
-            }
-        }
-        bal=0;
+        stack<int>star;
         
-        for(int i=s.length()-1;i>=0;i--)
+        int n=s.length();
+        
+        //iss step me apan ne open bracket balance kar liya okk man
+        for(int i=0;i<n;i++)
         {
             if(s[i]=='(')
             {
-                bal--;
+                open.push(i);
+            }
+            else if(s[i]=='*')
+            {
+                star.push(i);
             }
             else
             {
-                bal++;
+                if(!open.empty())
+                {
+                    open.pop();
+                }
+                else if(!star.empty())
+                {
+                    star.pop();
+                }
+                else
+                {
+                    return false;
+                }
             }
-            if(bal<0)
+        }
+        while(!open.empty())
+        {
+            if(star.empty())
+            {
+                return false;
+            }
+            else if(open.top()<star.top())
+            {
+                open.pop();
+                star.pop();
+            }
+            else
             {
                 return false;
             }
