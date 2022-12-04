@@ -1,21 +1,25 @@
 class Solution {
 public:
-    int minScore(int n, vector<vector<int>>& edges) {
+    int minScore(int n, vector<vector<int>>& roads) {
         
-         int x=edges.size();
+          int len=roads.size();
         
         vector<vector<pair<int,int>>>adj(n+1);
         
-        for(int i=0;i<x;i++)
+        for(int i=0;i<len;i++)
         {
-            adj[edges[i][0]].push_back({edges[i][1],edges[i][2]});
+            int u=roads[i][0];
+            int v=roads[i][1];
+            int w=roads[i][2];
             
-            adj[edges[i][1]].push_back({edges[i][0],edges[i][2]});
+            adj[u].push_back({v,w});
+            adj[v].push_back({u,w});
         }
         
-        vector<int>vis(n+1,0);
+        //apply bfs starting from node 1 and covering all node
+        queue<pair<int,int>>q;
         
-        queue<vector<int>>q;
+        vector<int>vis(n+1,0);
         
         q.push({1,INT_MAX});
         
@@ -23,23 +27,30 @@ public:
         
         while(!q.empty())
         {
-            auto top=q.front();
+            int node=q.front().first;
+            
+            int weight=q.front().second;
             
             q.pop();
             
-            ans=min(ans,top[1]);
+            ans=min(ans,weight);
             
-            vis[top[0]]=1; 
+            vis[node]=1;
             
-            for(auto itr:adj[top[0]])
+            for(auto itr:adj[node])
             {
-                if(!vis[itr.first])
+                //since our adj list contains two things man
+                int u=itr.first;
+                int w=itr.second;
+                
+                if(!vis[u])
                 {
-                    q.push({itr.first,itr.second});
+                    q.push({u,w});
+                    //node->weight
                 }
             }
+            
         }
         return ans;
-        
     }
 };
