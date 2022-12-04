@@ -59,7 +59,7 @@ public:
         
         for(int i=0;i<v.size();i++)
         {
-             pro=(long long int)v[i]*(n-v[i]);
+             pro=1ll*v[i]*(n-v[i]);
             ans+=pro;
         }
         if(components==1)return 0;
