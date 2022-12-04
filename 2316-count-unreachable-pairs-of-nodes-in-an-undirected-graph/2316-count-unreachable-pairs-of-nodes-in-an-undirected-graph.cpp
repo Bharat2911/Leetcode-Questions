@@ -64,6 +64,6 @@ public:
         }
         if(components==1)return 0;
         
-        return ans/(long long int)2;
+        return ans/2ll;
     }
 };
