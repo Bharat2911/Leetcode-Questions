@@ -20,7 +20,7 @@ class Solution
                     dfs(itr, graph, ans, path, target);
                 }
             }
-            path.pop_back();	//backtracking step meri jaan
+            // path.pop_back();	//backtracking step meri jaan
         }
     vector<vector < int>> allPathsSourceTarget(vector<vector < int>> &graph)
     {
