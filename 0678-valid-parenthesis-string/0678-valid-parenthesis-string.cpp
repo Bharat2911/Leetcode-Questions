@@ -2,16 +2,15 @@ class Solution {
 public:
     bool checkValidString(string s) {
         
-        //using the stack if we do it
-        //T.c=O(n)//itrating once in the string
-        //S.C=O(n)//using the stack
-        stack<int>open;
-        
-        stack<int>star;
+        //approach->take two stacks one managing the opena nd close bracket
+        //second stack will manage the start
         
         int n=s.length();
         
-        //iss step me apan ne open bracket balance kar liya okk man
+        stack<int>open;
+        stack<int>star;
+        
+        //positon main hai isme to apan stack me indices ko push kar rhe honge
         for(int i=0;i<n;i++)
         {
             if(s[i]=='(')
@@ -26,7 +25,7 @@ public:
             {
                 if(!open.empty())
                 {
-                    open.pop();
+                    open.pop();//balance ho gya close bracket
                 }
                 else if(!star.empty())
                 {
@@ -34,10 +33,11 @@ public:
                 }
                 else
                 {
-                    return false;
+                    return false;//dono empty to balance kaise hoga phir
                 }
             }
         }
+        //balance the open bracket
         while(!open.empty())
         {
             if(star.empty())
