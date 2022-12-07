@@ -1,5 +1,7 @@
 class Solution {
 public:
+    // approach->boundary pe present o se start karo jitne bhi connected o hai unko koi aur character se change karo then in the end special char ko wapis se o kar do aur bache hue o ko x kar do
+    //in shot only those o will pe flipped jo boundary pe nahi hai yaa kisi boundary pe present o se connected nahi hai
     void bfs(queue<pair<int,int>>&q,vector<vector<int>>&vis,vector<vector<char>>&grid)
     {
         int row=grid.size();
