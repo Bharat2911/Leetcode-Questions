@@ -11,40 +11,40 @@
  */
 class Solution {
 public:
-    int solve(TreeNode*root,int prev,int &ans)
+    int ans=0;
+    
+    int height(TreeNode*root)
     {
         if(root==NULL)
         {
             return 0;
         }
+        int l=0;
+        int r=0;
         
-        int left=solve(root->left,root->val,ans);
+        int left=height(root->left);
+        int right=height(root->right);
         
-        int right=solve(root->right,root->val,ans);
-        
-        ans=max(left+right,ans);
-        
-        if(root->val==prev)
+        //check that current value is equal to previous value 
+        if(root->left and root->left->val==root->val)
         {
-            return max(left+1,right+1);
+            l=left;
         }
-        else 
+        if(root->right and root->right->val==root->val)
         {
-            return 0;
+            r=right;
         }
+        ans=max(ans,l+r);
+        
+        return max(l,r)+1;
     }
     int longestUnivaluePath(TreeNode* root) {
         
-        //appraoach ->maintain the previous variable man
         if(root==NULL)
         {
             return 0;
         }
-        
-        int previous=root->val;
-        int ans=0;
-        
-        solve(root,previous,ans);
+        height(root);
         
         return ans;
     }
