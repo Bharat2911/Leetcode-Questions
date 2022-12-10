@@ -1,6 +1,7 @@
 # Decode the string
 ## Medium
-<div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">An encoded string (<strong>s</strong>) is given, and the task is to decode it. The encoding pattern is that the occurrence of the string is given at the starting of the string and each string is enclosed by square brackets.</span></p>
+<div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">An encoded string (<strong>s</strong>) is given, and the task is to decode it. The encoding pattern is that the occurrence of the string is given at the starting of the string and each string is enclosed by square brackets.<br>
+<strong>Note:&nbsp;</strong>The occurance of a single&nbsp;string is&nbsp;less than 1000.</span></p>
 
 <p><strong><span style="font-size:18px">Example 1:</span></strong></p>
 
