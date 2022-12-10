@@ -2,63 +2,57 @@ class Solution {
 public:
     string decodeString(string s) {
         
-        //we will be using the stack here 
-        //basically two stacks one for digit and other for string
-        
-        //[ ->push in the stack
-        //] ->pop from the stack
-        
+        //we only have top check for four things
         int n=s.length();
-        
-        stack<int>st1;
-        stack<string>st2;
+        string ans="";
+        string res;
         
         int num=0;
         
-        string res="";
+        stack<int>s1;
+        stack<string>s2;
         
-        for(auto itr:s)
+        for(int i=0;i<s.length();i++)
         {
-            if(isdigit(itr))
+            if(s[i]>='0' and s[i]<='9')
             {
-                num=num*10+(itr-'0');
-            }
-            
-            else if(isalpha(itr))
-            {
-                res+=itr;
-            }
-            
-            else if(itr=='[')
-            {
-                //push in the stack
-                st1.push(num);
                 
-                st2.push(res);
+                num=num*10+s[i]-'0';
                 
-                num=0;
+                
+            }
+            else if(isalpha(s[i]))
+            {
+                res+=s[i];
+            }
+            else if(s[i]=='[')
+            {
+                //push in the stack 
+                s1.push(num);
+                s2.push(res);
+                
+                //reset the values
                 res="";
+                num=0;
             }
-            else if(itr==']')
+            else
             {
-                //pop from the stack
+                //pop();
+                int freq=s1.top();
+                s1.pop();
                 
                 string temp=res;
-                
-                res=st2.top();
-                st2.pop();
-                
-                int freq=st1.top();
-                st1.pop();
+                res=s2.top();
+                s2.pop();
                 
                 
                 while(freq>0)
                 {
                     res+=temp;
-                    
                     freq--;
                 }
-                num=0;
+                
+                
             }
         }
         return res;
