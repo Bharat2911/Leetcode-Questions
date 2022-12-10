@@ -59,7 +59,7 @@ public:
                    res+=temp;
                    freq--;
                }
-                num=0;
+               
             }
         }
         return res;
