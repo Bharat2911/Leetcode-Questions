@@ -6,7 +6,7 @@ public:
     int solve(int i,int j,int row,int col,vector<vector<int>>&grid)
     {
         //base case out of bound
-        if(j<0 || j>=col)
+        if(j<0 || j>=col ||i<0 || i>row)
         {
             //since we need minimum so we will return an maximum value
             return 1e9+7;
