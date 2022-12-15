@@ -17,8 +17,7 @@ public:
             map[s[j]]++;
             
             
-            if(map.size()<j-i+1)
-            {
+            
                 while(map.size()<j-i+1)
                 {
                     //shrink the window
@@ -30,8 +29,8 @@ public:
                     }
                     i++;
                 }
-            }
-            else if(map.size()==j-i+1)
+            
+             if(map.size()==j-i+1)
             {
                 ans=max(ans,j-i+1);
                 
