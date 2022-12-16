@@ -21,7 +21,7 @@ public:
         
         //pattern ka second hamesha end me lagao aur pattern ka first char hamesha starting me to get maximum answer
         //T.C=O(n)//linearly itrating
-        //S.C=O(n)//using the suffix array
+        //S.C=O(n)//using the map
         
         string str1=text+pattern[1];//O(1)
         
