@@ -1,37 +1,33 @@
 class Solution {
 public:
-    void solve(int n,string res,vector<string>&ans,int open,int close)
+    void solve(int open,int close,int n,string str,vector<string>&ans)
     {
-        //base case
-        if(res.length()==2*n)
+        if(str.length()==2*n)
         {
-            ans.push_back(res);
+            ans.push_back(str);
             return;
         }
         
         if(open<n)
         {
-            //then i can add open
-            solve(n,res+"(",ans,open+1,close);
+            solve(open+1,close,n,str+"(",ans);
         }
-        if(close<open)
+         if(close<open)
         {
-            //adding the close  bracket
-            
-            solve(n,res+")",ans,open,close+1);
+            solve(open,close+1,n,str+")",ans);
         }
     }
     vector<string> generateParenthesis(int n) {
         
+        string str="(";
         
         int open=1;
         int close=0;
         
-        string res="(";
-        
         vector<string>ans;
         
-        solve(n,res,ans,open,close);
+        solve(open,close,n,str,ans);
+        
         
         return ans;
     }
