@@ -1,43 +1,45 @@
 class Solution {
 public:
-    int nextGreaterElement(int nn) {
+    int nextGreaterElement(int n) {
         
-        string nums=to_string(nn);
+        //in this we will apply next permutaion concept
         
-        string str=nums;
+        string str=to_string(n);
+        string s=str;
         
-          int n=nums.length();
+        int i;
+        int j;
         
-        int i,j;
-        
-        for(i=n-2;i>=0;i--)
+        for(i=str.length()-2;i>=0;i--)
         {
-            if(nums[i]<nums[i+1])
+            if(str[i]<str[i+1])
             {
                 break;
             }
         }
         if(i<0)
         {
-            reverse(nums.begin(),nums.end());
+            reverse(str.begin(),str.end());
         }
         else
         {
-            for(j=n-1;j>=0;j--)
+            for(j=str.length()-1;j>=0;j--)
             {
-                if(nums[j]>nums[i])
+                if(str[j]>str[i])
                 {
                     break;
                 }
             }
-            swap(nums[i],nums[j]);
-            reverse(nums.begin()+i+1,nums.end());
-            
+            swap(str[i],str[j]);
+            reverse(str.begin()+i+1,str.end());
         }
-        if(nums<=str)return -1;
-        long long ans=stoll(nums);
+        if(str<=s)
+        {
+            return -1;
+        }
+        long long ans=stoll(str);
+        if(ans<INT_MIN || ans>INT_MAX)return -1;
         
-        if(ans>INT_MAX || ans<INT_MIN)return -1;
         return ans;
     }
 };
