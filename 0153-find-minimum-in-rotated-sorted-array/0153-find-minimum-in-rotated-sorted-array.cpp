@@ -2,14 +2,16 @@ class Solution {
 public:
     int findMin(vector<int>& nums) {
         
-        int n=nums.size();
+        //approach 1->linear searching(O(n) and O(1))
         
-        int ans=INT_MAX;
+        int n=nums.size();
+        int ans=nums[0];
         
         for(auto itr:nums)
         {
             ans=min(ans,itr);
         }
         return ans;
+        
     }
 };
