@@ -99,42 +99,37 @@ struct Node
 */
 class Solution{
   public:
-    int ans=0;
+     int count=0;
     
-    void solve(Node*root,int target,long long sum)
+    void solve(Node*root,int k,long long sum)
     {
-        if(root==NULL)
-        {
-            return;
-        }
+        if(root==NULL)return;
         
         sum+=root->data;
         
-        if(sum==target)
+        if(sum==k)
         {
-            ans++;
-            // return;
+            count++;
         }
-        solve(root->left,target,sum);
-        solve(root->right,target,sum);
+        
+        solve(root->left,k,sum);
+        solve(root->right,k,sum);
     }
     int sumK(Node *root,int k)
     {
         // code here 
-          
         if(root==NULL)
         {
             return 0;
         }
-        
         long long sum=0;
         
         solve(root,k,sum);
-        
+        //since root kahi se bhi start ho sakta hai and kahi pe bhi end ho sakta hia
         sumK(root->left,k);
         sumK(root->right,k);
         
-        return ans;
+        return count;
     }
 };
 
