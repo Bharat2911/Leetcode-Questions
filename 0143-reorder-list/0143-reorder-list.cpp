@@ -47,7 +47,7 @@ public:
         
         ListNode*slow=head;
         
-        ListNode*prev=head;
+        ListNode*prev=NULL;
         
         while(fast!=NULL and fast->next!=NULL)
         {
