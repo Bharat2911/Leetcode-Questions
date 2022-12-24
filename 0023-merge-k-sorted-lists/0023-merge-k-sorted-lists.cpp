@@ -10,36 +10,41 @@
  */
 class Solution {
 public:
-  class MyCmp{
-        public:
-            bool operator()(ListNode *l1,ListNode *l2){
-                return l1->val>l2->val;
-            }
-    };
+    ListNode*merge(ListNode*l1,ListNode*l2)
+    {
+        if(!l1)return l2;
+        if(!l2)return l1;
         
+        ListNode*result=NULL;
         
+        if(l1->val>=l2->val)
+        {
+            result=l2;
+            result->next=merge(l1,l2->next);
+        }
+        else
+        {
+            result=l1;
+            result->next=merge(l1->next,l2);
+        }
+        return result;
+    }
     ListNode* mergeKLists(vector<ListNode*>& lists) {
-        int l=lists.size();
-        priority_queue<ListNode*,vector<ListNode*>,MyCmp>pq;
-        for(int i=0;i<l;i++){
-            if(lists[i]!=NULL){
-                pq.push(lists[i]);
-            }
-        }
-        ListNode *head=new ListNode();
-        ListNode* curr=head;
-        while(!pq.empty()){
-            curr->next=pq.top();
-            curr=curr->next;
-            pq.pop();
-            if(curr->next!=NULL){
-                pq.push(curr->next);
-            }
-        }
-        return head->next;
         
-
+        int n=lists.size();
         
-    
+        if(n==0)
+        {
+            return NULL;
+        }
+        if(n==1)
+        {
+            return lists[0];
+        }
+        for(int i=1;i<n;i++)
+        {
+            lists[0]=merge(lists[0],lists[i]);
+        }
+        return lists[0];
     }
 };
