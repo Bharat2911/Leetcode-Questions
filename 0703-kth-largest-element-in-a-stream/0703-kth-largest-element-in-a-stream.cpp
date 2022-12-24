@@ -1,16 +1,11 @@
 class KthLargest {
 public:
-    //we will be doing this uing min heap
-    //T.C=O(n log k)
-    
-    //S.C=O(n);
-    
     priority_queue<int,vector<int>,greater<int>>pq;
-    int xx;
+    int x;
     KthLargest(int k, vector<int>& nums) {
         
-        int n=nums.size();
-        xx=k;
+        x=k;
+        
         for(auto itr:nums)
         {
             pq.push(itr);
@@ -26,13 +21,11 @@ public:
         
         pq.push(val);
         
-        if(pq.size()>xx)
+        if(pq.size()>x)
         {
             pq.pop();
         }
-        
         return pq.top();
-        
     }
 };
 
