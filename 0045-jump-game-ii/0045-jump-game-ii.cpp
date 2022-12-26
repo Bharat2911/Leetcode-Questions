@@ -1,17 +1,16 @@
 class Solution {
 public:
-    int solve(vector<int>&nums)
+    int solve(vector<int>&nums,int n)
     {
-         int jump=1;
+        int jump=1;
         int steps=nums[0];
+        int max_range=nums[0];
         
-        int max_reach=nums[0];
-        
-        for(int i=1;i<nums.size();i++)
+        for(int i=1;i<n;i++)
         {
-            if(i==nums.size()-1)return jump;
+            if(i==n-1)return jump;
             
-            max_reach=max(max_reach,i+nums[i]);
+            max_range=max(max_range,i+nums[i]);
             
             steps--;
             
@@ -19,20 +18,19 @@ public:
             {
                 jump++;
                 
-                if(i>=max_reach)return -1;
+                if(i>=max_range)return -1;
                 
-                steps=max_reach-i;
+                steps=max_range-i;
             }
         }
-         return steps;
+        return steps;
     }
     int jump(vector<int>& nums) {
         
+        int n=nums.size();
         
-        if(nums.size()==1)return 0;//if n==1 means we are already at the last index
-        if(nums.size()>1 and nums[0]==0)return -1;//if start ele is 0 then we cant take any steps
-       
-        return solve(nums);
+        if(n==1)return 0;
         
+        return solve(nums,n);
     }
 };
