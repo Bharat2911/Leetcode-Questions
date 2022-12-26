@@ -10,25 +10,30 @@ public:
         
         q.push(start);
         
+        vis[start]=1;
+        
         while(!q.empty())
         {
-            
-            int curr=q.front();
-            
+            int idx=q.front();
             q.pop();
             
-            vis[curr]=1;
-            
-            if(arr[curr]==0)return true;
-            
-            if(curr+arr[curr]>=0 and curr+arr[curr]<n and !vis[curr+arr[curr]])
+            if(arr[idx]==0)
             {
-                q.push(curr+arr[curr]);
+                return true;
             }
             
-            if(curr-arr[curr]>=0 and curr-arr[curr]<n and !vis[curr-arr[curr]])
+            if(idx-arr[idx]>=0 and idx-arr[idx]<n and !vis[idx-arr[idx]])
             {
-                q.push(curr-arr[curr]);
+                vis[idx-arr[idx]]=1;
+                
+                q.push(idx-arr[idx]);
+            }
+            
+            if(idx+arr[idx]>=0 and idx+arr[idx]<n and !vis[idx+arr[idx]])
+            {
+                vis[idx+arr[idx]]=1;
+                
+                q.push(idx+arr[idx]);
             }
         }
         return false;
