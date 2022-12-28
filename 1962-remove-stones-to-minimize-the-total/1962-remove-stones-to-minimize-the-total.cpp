@@ -1,42 +1,44 @@
-class Solution
-{
-    public:
-        int minStoneSum(vector<int> &piles, int k)
+class Solution {
+public:
+    int minStoneSum(vector<int>& nums, int k) {
+        
+        int n=nums.size();
+        
+        //we will be using the max heap;
+        
+        priority_queue<int>pq;
+        
+        for(auto itr:nums)
         {
-
-            int n = piles.size();
-
-            priority_queue<int> pq;
-
-            for (auto itr: piles)
-            {
-                pq.push(itr);
-            }
-
-            while (k--)
-            {
-                int top = pq.top();
-                pq.pop();
-
-                if (top & 1)//if odd  then half and add one
-                {
-                    top = top / 2;
-                    top = top + 1;
-                }
-                else
-                {
-                    top = top / 2;//if even then simply half
-                }
-
-                pq.push(top);
-            }
-            int sum = 0;
-
-            while (pq.size() > 0)
-            {
-                sum += pq.top();
-                pq.pop();
-            }
-            return sum;
+            pq.push(itr);
         }
+        
+        int ans=0;
+        
+        while(!pq.empty() and k>0)
+        {
+            int top=pq.top();
+            pq.pop();
+            k--;
+            if(top&1)
+            {
+                top=top/2;
+                top=top+1;
+            }
+            else
+            {
+                top=top/2;
+            }
+            pq.push(top);
+        }
+        while(!pq.empty())
+        {
+            int top=pq.top();
+            pq.pop();
+            
+            ans+=top;
+            
+        }
+        return ans;
+    }
 };
