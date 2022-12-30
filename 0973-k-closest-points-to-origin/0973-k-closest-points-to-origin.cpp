@@ -1,30 +1,21 @@
 class Solution {
 public:
-    int dist(int a,int b)
+    int dist(int p1,int p2)
     {
-        int x=a*a+b*b;
-        
-        return x;
-        
+        return (p1*p1)+(p2*p2);
     }
     vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
         
-        //use the priorty queue
-        //t.C o(nlog k)
-        //S.C O(k) //since every time priority queue is holding four elements 
+        priority_queue<pair<int,pair<int,int>>>pq;
         
-        int n=points.size();
-         //p/q -> {dist,{xi,yi}};
-        
-        priority_queue<pair<int,pair<int,int>>>pq;//max heap hi banao since we want the k min 
-        
-        for(int i=0;i<n;i++)
+        for(auto itr:points)
         {
-            int u=points[i][0];
+            int u=itr[0];
+            int v=itr[1];
             
-            int v=points[i][1];
+            int x=dist(u,v);
             
-            pq.push({dist(u,v),{u,v}});
+            pq.push({x,{u,v}});
             
             if(pq.size()>k)
             {
@@ -32,13 +23,19 @@ public:
             }
         }
         
-        
         vector<vector<int>>ans;
         
-        for(int i=0;i<k;i++)
+        while(!pq.empty())
         {
-            ans.push_back({pq.top().second.first,pq.top().second.second});
+            int top=pq.top().first;
+            
+            int p1=pq.top().second.first;
+            
+            int p2=pq.top().second.second;
+            
             pq.pop();
+            
+            ans.push_back({p1,p2});
         }
         
         return ans;
