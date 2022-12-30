@@ -1,31 +1,28 @@
 class Solution {
 public:
-    void solve(int start,vector<vector<int>>&adj,vector<vector<int>>&ans,vector<int>path,int &target)
+    void solve(int start,vector<vector<int>>&ans,vector<int>paths,vector<vector<int>>&adj,int target)
     {
-        path.push_back(start);
+        paths.push_back(start);
         
         if(start==target)
         {
-            ans.push_back(path);
+            ans.push_back(paths);
             return;
         }
         else
         {
+            //itrate into adj list
             for(auto itr:adj[start])
             {
-                solve(itr,adj,ans,path,target);
+                solve(itr,ans,paths,adj,target);
             }
         }
-        path.pop_back();
     }
     vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& graph) {
         
-        //make the adj list
         int n=graph.size();
         
         vector<vector<int>>adj(n);
-        int target=n-1;
-        int start=0;
         
         for(int i=0;i<n;i++)
         {
@@ -36,9 +33,14 @@ public:
         }
         
         vector<vector<int>>ans;
-        vector<int>path;
         
-        solve(start,adj,ans,path,target);
+        vector<int>paths;
+        
+        int target=n-1;
+        
+        int start=0;
+        
+        solve(start,ans,paths,adj,target);
         
         return ans;
     }
