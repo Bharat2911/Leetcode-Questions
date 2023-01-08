@@ -14,7 +14,7 @@ public:
         }
         while(!pq.empty() and k>0)
         {
-            int top=pq.top();
+            long long top=pq.top();
             pq.pop();
             
             ans+=top;
