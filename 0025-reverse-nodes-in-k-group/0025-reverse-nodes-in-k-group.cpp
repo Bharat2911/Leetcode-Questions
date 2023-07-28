@@ -12,43 +12,45 @@ class Solution {
 public:
     int length(ListNode*head)
     {
+        ListNode*ptr=head;
         int l=0;
         
-        ListNode*curr=head;
-        
-        while(curr!=NULL)
+        while(ptr!=NULL)
         {
-            curr=curr->next;
+            ptr=ptr->next;
             l++;
         }
-        
         return l;
+        
     }
     ListNode* reverseKGroup(ListNode* head, int k) {
         
-        if(head==NULL )
+        //base case
+        if(head==NULL)
         {
             return NULL;
+            
         }
-        int len=length(head);
+        int l=length(head);
         
-        if(k>len)return head;
+        if(k>l)return head;
         
-        ListNode*curr=head;
+        //reverse first k itrative
         ListNode*prev=NULL;
+        ListNode*curr=head;
         ListNode*next;
+        int count=1;
         
-        int count=0;
-        
-        while(curr!=NULL and count<k)
+        while(curr!=NULL and count<=k)
         {
             next=curr->next;
-            
             curr->next=prev;
             prev=curr;
             curr=next;
             count++;
         }
+        //now recursivly reverse the rest of the linklist
+        
         if(next)
         {
             head->next=reverseKGroup(next,k);
