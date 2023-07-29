@@ -2,28 +2,27 @@ class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
         
-        //brute force approach 
-        //T.C-> O(n^2);
-        //S.C-> O(1);
         
-        //optimised approach 
-        //T.C->O(n);
-        //S.C->O(n);//since we are usng the map
         int n=nums.size();
+        
+        unordered_map<int,int>map;
         
         vector<int>ans;
         
+        
+        //map.find()==map.end()//means not present in the map
         for(int i=0;i<n;i++)
         {
-            for(int j=i+1;j<n;j++)
+            if(map.find(target-nums[i])!=map.end())//means present in map
             {
-                if(nums[i]+nums[j]==target)
-                {
-                  ans.push_back(i);
-                  ans.push_back(j);
-                }
+                ans.push_back(map[target-nums[i]]);
+                
+                ans.push_back(i);
             }
+            
+            map[nums[i]]=i;
         }
+        
         return ans;
     }
 };
