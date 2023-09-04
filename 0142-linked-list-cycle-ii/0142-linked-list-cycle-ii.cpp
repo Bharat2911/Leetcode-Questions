@@ -9,16 +9,16 @@
 class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
-        
-        ListNode*fast=head;
+      
         ListNode*slow=head;
+        ListNode*fast=head;
         
         while(fast!=NULL and fast->next!=NULL)
         {
             fast=fast->next->next;
             slow=slow->next;
             
-            if(fast==slow)
+            if(slow==fast)
             {
                 fast=head;
                 
@@ -30,7 +30,6 @@ public:
                 return slow;
             }
         }
-        //if there is no cycle the loop will break and we get NULL
         return NULL;
     }
 };
