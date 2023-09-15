@@ -7,6 +7,12 @@ public:
         //T.C->O(n)
         //S.C->O(1)
         
+        
+        //binary search
+        //T.C->O(log n)
+        //S.C->O(1)
+        
+        
         for(auto itr:nums)
         {
             if(itr==target)
