@@ -14,36 +14,37 @@ public:
     unordered_map<int,int>map;
     int idx=0;
     
-    TreeNode*solve(int lb,int ub,vector<int>&pre,vector<int>&inorder)
+    TreeNode*solve(int lb,int ub,vector<int>&preorder,vector<int>&inorder)
     {
         if(lb>ub)
         {
             return NULL;
         }
         
-        TreeNode*root=new TreeNode(pre[idx]);
-        
-        int i=map[pre[idx]];
+        TreeNode*root=new TreeNode(preorder[idx]);
         
         idx++;
-        root->left=solve(lb,i-1,pre,inorder);
         
-        root->right=solve(i+1,ub,pre,inorder);
+        int i=map[root->val];
+        
+        root->left=solve(lb,i-1,preorder,inorder);
+        
+        root->right=solve(i+1,ub,preorder,inorder);
         
         return root;
+        
     }
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
         
-        int n=preorder.size();
+        int lb=0;
+        int ub=inorder.size()-1;
         
-        for(int i=0;i<n;i++)
+        for(int i=0;i<inorder.size();i++)
         {
             map[inorder[i]]=i;
         }
         
-        int lb=0;
-        int ub=n-1;
-        
         return solve(lb,ub,preorder,inorder);
+        
     }
 };
