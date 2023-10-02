@@ -4,21 +4,21 @@ public:
         
         int n=nums.size();
         
-        int curr_sum=0;
+        int sum=0;
         
-        int ans=INT_MIN;
+        int max_sum=INT_MIN;
         
         for(int i=0;i<n;i++)
         {
-            curr_sum=curr_sum+nums[i];
+            sum+=nums[i];
             
-            ans=max(ans,curr_sum);
+            max_sum=max(max_sum,sum);
             
-            if(curr_sum<0)
+            if(sum<0)
             {
-                curr_sum=0;
+                sum=0;
             }
         }
-        return ans;
+        return max_sum;
     }
 };
