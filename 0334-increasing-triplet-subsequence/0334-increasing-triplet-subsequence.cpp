@@ -28,9 +28,9 @@ public:
             right[i]=max(right[i+1],nums[i]);
         }
         
-        for(int i=0;i<n;i++)
+        for(int i=1;i<n-1;i++)
         {
-            if(nums[i]>left[i] and nums[i]<right[i])
+            if(nums[i]>left[i-1] and nums[i]<right[i+1])
             {
                 return true;
             }
