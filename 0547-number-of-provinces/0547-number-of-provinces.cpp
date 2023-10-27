@@ -1,72 +1,45 @@
-class disjoint{
-    // vector<int>parent,size;
-
-    public:
-     vector<int>parent,size;
-    disjoint(int n)
-    {
-        parent.resize(n+1);
-        size.resize(n+1,1);
-
-        for(int i=0;i<=n;i++)
-        {
-            parent[i]=i;
-        }
-
-    }
-    int findparent(int u)
-    {
-        if(u==parent[u])
-        {
-            return u;
-        }
-        return parent[u]=findparent(parent[u]);
-    }
-    void unionbysize(int u,int v)
-    {
-        int pu=findparent(u);
-
-        int pv=findparent(v);
-
-        if(pu==pv)return;
-
-        if(size[pu]<size[pv])
-        {
-            parent[pu]=pv;
-            size[pv]+=size[pu];
-        }
-        else
-        {
-            parent[pv]=pu;
-            size[pu]+=pv;
-        }
-    }
-};
 class Solution {
 public:
-    int findCircleNum(vector<vector<int>>& adj) {
+    void dfs(int start,vector<int>&vis,vector<vector<int>>&grid,int n)
+    {
+        vis[start]=1;
         
-        int n=adj.size();
-        
-        disjoint dv(n);
+        vector<int>adj;
         
         for(int i=0;i<n;i++)
         {
-            for(int j=0;j<n;j++)
+            int x=grid[start][i];
+            if(x==1)
             {
-                if(adj[i][j]==1)
-                {
-                    dv.unionbysize(i,j);
-                }
+                adj.push_back(i);
             }
         }
+        for(auto itr:adj)
+        {
+            if(!vis[itr])
+            {
+                vis[itr]=1;
+                dfs(itr,vis,grid,n);
+            }
+        }
+    }
+    int findCircleNum(vector<vector<int>>& grid) {
+        
+        //make the adj list 
+        //keep the count of component of graph 
+        //this count will be our answer
+        int n=grid.size();
+        
         int count=0;
+        vector<int>vis(n,0);
         
         for(int i=0;i<n;i++)
         {
-            if(dv.parent[i]==i)
+            if(!vis[i])
             {
                 count++;
+                dfs(i,vis,grid,n);
+                
             }
         }
         return count;
