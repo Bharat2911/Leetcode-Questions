@@ -1,19 +1,15 @@
 class Solution {
 public:
     int orangesRotting(vector<vector<int>>& grid) {
-        
-        int row=grid.size();
-        
-        int col=grid[0].size();
+     
+        queue<pair<int,int>>q;
         
         int fresh=0;
         
-        int time=0;
+        //multisource bfs we will be doing here boss jii
         
-        queue<pair<int,int>>q;
-        
-        int dx[4]={0,1,0,-1};
-        int dy[4]={1,0,-1,0};
+        int row=grid.size();
+        int col=grid[0].size();
         
         for(int i=0;i<row;i++)
         {
@@ -27,40 +23,49 @@ public:
                 {
                     fresh++;
                 }
-                
             }
         }
-        if(fresh==0)
-        {
-            return 0;
-        }
+        if(fresh==0)return 0;
+        
+        int count=0;
+        
+         int dx[4]={0,1,0,-1};
+        int dy[4]={1,0,-1,0};
+        
         while(!q.empty())
         {
-           int sz=q.size();
-           time++;
+            int sz=q.size();
+            
+            count++;
+            
             while(sz--)
             {
-                 int i=q.front().first;
-            int j=q.front().second;
-            
-            q.pop();
-            
-            for(int idx=0;idx<4;idx++)
-            {
-                int newi=i+dx[idx];
-                int newj=j+dy[idx];
+                int i=q.front().first;
+                int j=q.front().second;
                 
-                if(newi>=0 and newi<row and newj>=0 and newj<col and grid[newi][newj]==1)
+                q.pop();
+                
+                
+                for(int idx=0;idx<4;idx++)
                 {
-                    grid[newi][newj]=2;
-                    fresh--;
+                    int newi=i+dx[idx];
                     
-                    q.push({newi,newj});
+                    int newj=j+dy[idx];
+                    
+                    if(newi>=0 and newi<row and newj>=0 and newj<col and grid[newi][newj]==1)
+                    {
+                        grid[newi][newj]=2;
+                        
+                        q.push({newi,newj});
+                        
+                        fresh--;
+                        
+                    }
                 }
             }
-            }
+            
         }
-        if(fresh==0)return time-1;
+        if(fresh==0)return count-1;
         
         else return -1;
     }
