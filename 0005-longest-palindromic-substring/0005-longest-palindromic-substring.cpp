@@ -2,47 +2,52 @@ class Solution {
 public:
     string longestPalindrome(string s) {
         
-        //two cases will be there either a plaindrome will be of even length or of odd length
         int n=s.length();
         
+        //i will be using the even odd length man
+        
         int start=0;
+        
         int end=1;
+        
+        
+        //odd case mai current se left aur right ko match karna chaiye
         
         for(int i=0;i<n;i++)
         {
-            //odd length
+            // odd case we will be doing here 
+            
             int low=i-1;
             int high=i+1;
             
             while(low>=0 and high<n and s[low]==s[high])
             {
-                if(high-low+1>end)
+                if(end<high-low+1)
                 {
-                    end=high-low+1;
                     start=low;
+                    end=high-low+1;
                 }
-                
-                //xpand kar rha hoga me apne searching spce ko
                 
                 low--;
                 high++;
+                
             }
             
             //even case
-            
-            low=i-1;
-            high=i;
+             low=i;
+             high=i+1;
             
             while(low>=0 and high<n and s[low]==s[high])
             {
-                if(high-low+1>end)
+                if(end<high-low+1)
                 {
-                    end=high-low+1;
                     start=low;
+                    end=high-low+1;
                 }
-                low--;
-                high++;
                 
+                low--;
+                
+                high++;
             }
         }
         return s.substr(start,end);
